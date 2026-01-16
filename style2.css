@@ -1,0 +1,122 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+background-color: #447F98;
+background-image: url('6.jpg');
+background-repeat:repeat;
+}
+
+
+
+
+footer { 
+    background-color: #629BB5; 
+    color: white; 
+    clear: both; 
+    text-align: center; 
+    padding: 20px; 
+    font-family: Courier, monospace;
+}
+
+
+
+
+
+/* Adjust the navbar padding if it feels too cramped */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 5%; 
+  height: 70px; /* Sets a consistent height for the whole bar */
+  background-color: #ffffff;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+/* Hover & Active State */
+.nav-links a:hover, 
+.nav-links a.active {
+  color: #447F98;
+  border-bottom: 2px solid #007bff;
+}
+
+
+
+/* Sign Up Button */
+.btn-signup {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-signup:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+
+
+
+@font-face {
+font-family: 'swi';
+  src: url(swirly.otf);
+}
+
+@font-face {
+  font-family: 'note';
+  src: url(Notedry.ttf);
+}
+
+@font-face {
+font-family: 'jes';
+  src: url(Jester.ttf);
+}
+
+
+
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1e73be;
+}
+
+/* This targets the logo image specifically */
+.logo img {
+  height: 100px; /* Adjust this number to make it smaller or larger */
+  width: auto;  /* Maintains the aspect ratio so it doesn't look squished */
+  object-fit: contain;
+}
+
+/* Ensure the logo container stays aligned with the text */
+.logo {
+  display: flex;
+  align-items: center;
+  
+  flex-shrink: 0; /* Prevents the logo from being squeezed */
+}
