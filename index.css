@@ -260,3 +260,9 @@ display: flex;
   margin-right: auto;
 }
 
+.right-img{
+  display: block;
+  margin-left: auto;
+  margin-right: 0;
+}
+
