@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakify - Games</title>
+    <link rel="stylesheet" href="games.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="speakify.jpeg" alt="Logo">
+            <span>SPEAKIFY</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="podcast.html">Podcast</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="games.html" class="active">Games</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="btn-signup">Sign Up / Login</button>
+        </div>
+    </nav>
+
+    <div id="side-progress-container">
+        <div class="progress-label">PROGRESS</div>
+        <div class="progress-track">
+            <div id="progress-bar"></div>
+        </div>
+        <div id="progress-text">0%</div>
+    </div>
+
+    <div class="games-hero">
+        <h1>Start Learning with Fun Language Games!</h1>
+        <p>Choose a language to begin your adventure.</p>
+    </div>
+
+    <div class="lang-filter">
+        <button id="btn-en" class="filter-btn active" onclick="showLang('english', this)"> English</button>
+        <button id="btn-jp" class="filter-btn" onclick="showLang('japanese', this)"> Japanese</button>
+        <button id="btn-fr" class="filter-btn" onclick="showLang('french', this)"> French</button>
+    </div>
+
+    <main id="game-dashboard">
+        </main>
+
+    <div id="gameModal" class="modal-overlay">
+        <div class="modal-box">
+            <span onclick="closeModal()" class="close-modal">&times;</span>
+            <h2 id="modal-title"></h2>
+            <div class="stats-header">
+                <span>Score: <b id="score">0</b></span>
+                <span id="timer-wrapper" style="display:none;">⏳ <b id="timer-sec">10</b>s</span>
+                <span>Lives: <b id="lives">❤️❤️❤️</b></span>
+            </div>
+            <hr>
+            <div id="game-content"></div> 
+            <div id="feedback-message"></div>
+        </div>
+    </div>
+
+    <button id="backToTop" onclick="scrollToTop()">↑</button>
+    <button id="muteToggle" class="floating-mute" onclick="toggleMute()">🔊</button>
+
+    <audio id="sound-correct" src="correct.mp3"></audio>
+    <audio id="sound-wrong" src="wrong.mp3"></audio>
+    <audio id="sound-congrats" src="congrats.mp3"></audio>
+    <audio id="sound-fail" src="fail.mp3"></audio>
+
+    <footer>&copy; 2026 SPEAKIFY</footer>
+
+    <script src="games.js"></script>
+</body>
+</html>
