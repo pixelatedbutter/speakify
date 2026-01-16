@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Speakify - Podcast</title>
+<link rel="stylesheet" href="style3.css">
+
+<style>
+img { border-radius: 30%; }
+
+/* ===== AUDIO PLAYER ===== */
+.audio-player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 12px 0 28px;
+}
+
+.play-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: none;
+  background: black;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* ===== WAVEFORM ===== */
+.waveform {
+  position: relative;
+  flex: 1;
+  height: 26px;
+  background: repeating-linear-gradient(
+    to right,
+    #ccc 0,
+    #ccc 3px,
+    transparent 3px,
+    transparent 6px
+  );
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.wave-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: repeating-linear-gradient(
+    to right,
+    #000 0,
+    #000 3px,
+    transparent 3px,
+    transparent 6px
+  );
+  pointer-events: none;
+}
+
+.progress {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.time {
+  font-size: 13px;
+  white-space: nowrap;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar">
+  <div class="logo">
+    <img src="speakify.jpeg">
+    <span>SPEAKIFY</span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index2.html">Home</a></li>
+    <li><a href="podcast.html" class="active">Podcast</a></li>
+    <li><a href="language.html">Language</a></li>
+    <li><a href="games.html">Games</a></li>
+    <li><a href="about.html">About Us</a></li>
+  </ul>
+
+  <div class="nav-actions">
+    <button class="btn-signup">Sign Up / Login</button>
+  </div>
+</nav>
+
+<!-- ===== PODCAST SECTION ===== -->
+<section class="podcast-section">
+<h1>Podcasts</h1>
+
+<div class="podcast-container">
+
+<!-- ========= ENGLISH ========= -->
+<div class="podcast-column">
+<img src="eng.jpeg" style="width:100px">
+<h2>English</h2>
+<p>Listen to engaging English podcasts.</p>
+
+<ul>
+<li>Episode 1: Daily Conversations</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+
+  <audio src="English Podcast for Beginners & Intermediate Learners  English Speaking Practice.mp3"></audio>
+</div>
+
+<li>Episode 2: Travel Stories</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="Learn English quickly with podcast  English learning Conversation  Episode 1.mp3"></audio>
+</div>
+
+<li>Episode 3: Business English</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="Une visite guidée du Paris noir (A T.mp3"></audio>
+</div>
+</ul>
+</div>
+
+<!-- ========= FRENCH ========= -->
+<div class="podcast-column">
+<img src="french-flag.jpeg" style="width:110px">
+<h2>French</h2>
+<p>Explore French podcasts.</p>
+
+<ul>
+<li>Épisode 1 : Conversations Quotidiennes</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="Une visite guidée du Paris noir (A T.mp3"></audio>
+</div>
+
+<li>Épisode 2 : Histoires de Voyage</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="Polynésie, mon amour (Polynesia, My.mp3"></audio>
+</div>
+
+<li>Épisode 3 : Français des Affaires</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="Mont-Saint-Michel, mon amour (Mont-S.mp3"></audio>
+</div>
+</ul>
+</div>
+
+<!-- ========= JAPANESE ========= -->
+<div class="podcast-column">
+<img src="jpn.jpeg" style="width:100px">
+<h2>Japanese</h2>
+<p>Practice Japanese listening.</p>
+
+<ul>
+<li>Episode 1: 旅行の話 (Basic Daily Words)</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="[Lesson1 ] I am_ I am not _ Basic Japanese Grammar [mTIWMBfo2o8].mp3"></audio>
+</div>
+
+<li>Episode 2: 旅行の話 (Convenience Store Conversation)</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="Learn Basic Japanese _ Minna No Nihongo Vocabulary N5 Lesson 4 [brZHcAfUFnc].mp3"></audio>
+</div>
+
+<li>Episode 3: ビジネス日本語 (50 Must Know Phrases)</li>
+<div class="audio-player">
+  <button class="play-btn">▶</button>
+  <div class="waveform">
+    <div class="wave-progress"></div>
+    <input type="range" class="progress" value="0">
+  </div>
+  <span class="time"><span class="current">0:00</span> / <span class="duration">0:00</span></span>
+<button class="speed-btn">1×</button>
+  <audio src="50 Must-Know Phrases to Ask Questions in Japanese _ Formal and Informal [N9C-WZFptzA].mp3"></audio>
+</div>
+</ul>
+</div>
+
+</div>
+</section>
+
+<footer>
+  &copy; 2026 SPEAKIFY
+</footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+document.querySelectorAll('.audio-player').forEach(player => {
+  const audio = player.querySelector('audio');
+  const playBtn = player.querySelector('.play-btn');
+  const slider = player.querySelector('.progress');
+  const wave = player.querySelector('.wave-progress');
+  const current = player.querySelector('.current');
+  const duration = player.querySelector('.duration');
+  const speedBtn = player.querySelector('.speed-btn');
+
+  const speeds = [0.5, 1, 1.25, 1.5, 2];
+  let speedIndex = 1; // default 1x
+  let rafId;
+
+  speedBtn.onclick = () => {
+    speedIndex = (speedIndex + 1) % speeds.length;
+    audio.playbackRate = speeds[speedIndex];
+    speedBtn.textContent = speeds[speedIndex] + '×';
+  };
+
+  playBtn.onclick = () => {
+    if (!audio.paused) {
+      audio.pause();
+      playBtn.textContent = '▶';
+      cancelAnimationFrame(rafId);
+      return;
+    }
+
+    document.querySelectorAll('audio').forEach(a => {
+      if (a !== audio) a.pause();
+    });
+    document.querySelectorAll('.play-btn').forEach(b => b.textContent = '▶');
+
+    audio.play();
+    playBtn.textContent = '⏸';
+    update();
+  };
+
+  audio.onloadedmetadata = () => {
+    slider.max = audio.duration;
+    duration.textContent = format(audio.duration);
+    audio.playbackRate = speeds[speedIndex];
+  };
+
+  audio.onended = () => {
+    playBtn.textContent = '▶';
+    cancelAnimationFrame(rafId);
+  };
+
+  slider.oninput = () => {
+    audio.currentTime = slider.value;
+    sync();
+  };
+
+  function update() {
+    sync();
+    if (!audio.paused) rafId = requestAnimationFrame(update);
+  }
+
+  function sync() {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    slider.value = audio.currentTime;
+    wave.style.width = percent + '%';
+    current.textContent = format(audio.currentTime);
+  }
+
+  function format(t) {
+    const m = Math.floor(t / 60);
+    const s = Math.floor(t % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+});
+</script>
+
+
+</body>
+</html>
