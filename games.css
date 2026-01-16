@@ -3,6 +3,8 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     background-color: #447F98;
+background-image: url('6.jpg');
+background-repeat:repeat;
     overflow-x: hidden;
 }
 
@@ -113,3 +115,4 @@ body {
 
 
 footer { background-color: #629BB5; color: white; clear: both; text-align: center; padding: 20px; font-family: Courier, monospace; }
+
