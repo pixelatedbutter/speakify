@@ -266,3 +266,5 @@ display: flex;
   margin-right: 0;
 }
 
+#backToTop { display: none; position: fixed; bottom: 100px; right: 30px; background: #ffd600; color: #333; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2500; }
+.floating-mute { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #ffd600; border: none; cursor: pointer; z-index: 2500; font-size: 20px; }
