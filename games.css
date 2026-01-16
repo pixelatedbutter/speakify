@@ -26,6 +26,23 @@ background-repeat:repeat;
   gap: 30px;
 }
 
+.nav-links a {
+  text-decoration: none;
+  color: black;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding-bottom: 5px;
+  transition: all 0.3s ease;
+  border-bottom: 2px solid transparent;
+}
+
+/* Hover & Active State */
+.nav-links a:hover, 
+.nav-links a.active {
+  color: #447F98;
+  border-bottom: 2px solid #007bff;
+}
+
 /* Logo Section */
 .logo {
   display: flex;
@@ -119,5 +136,6 @@ background-repeat:repeat;
 
 
 footer { background-color: #629BB5; color: white; clear: both; text-align: center; padding: 20px; font-family: Courier, monospace; }
+
 
 
