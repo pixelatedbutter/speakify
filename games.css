@@ -20,15 +20,30 @@ body {
     z-index: 2000;
 }
 
+/* Logo Section */
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-weight: bold;
-    font-size: 1.4rem;
-    color: #1e73be;
+  display: flex;
+  align-items: center;
+
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1e73be;
 }
-.logo img { height: 45px; width: auto; }
+
+/* This targets the logo image specifically */
+.logo img {
+  height: 100px; /* Adjust this number to make it smaller or larger */
+  width: auto;  /* Maintains the aspect ratio so it doesn't look squished */
+  object-fit: contain;
+}
+
+/* Ensure the logo container stays aligned with the text */
+.logo {
+  display: flex;
+  align-items: center;
+  
+  flex-shrink: 0; /* Prevents the logo from being squeezed */
+}
 
 .nav-links { list-style: none; display: flex; gap: 35px; margin: 0; padding: 0; }
 .nav-links a { text-decoration: none; color: #333; font-weight: 600; font-size: 1rem; transition: 0.3s; padding: 10px 0; }
@@ -95,5 +110,6 @@ body {
 
 #backToTop { display: none; position: fixed; bottom: 100px; right: 30px; background: #ffd600; color: #333; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2500; }
 .floating-mute { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #ffd600; border: none; cursor: pointer; z-index: 2500; font-size: 20px; }
+
 
 footer { background-color: #629BB5; color: white; clear: both; text-align: center; padding: 20px; font-family: Courier, monospace; }
