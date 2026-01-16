@@ -45,7 +45,7 @@ ul {
 
 
 <div class ="content-box">
-<div class= "about">
+<div class= "about reveal">
 <h1 style="font-family: note; font-size: 80px;" id="about">About us </h1>
 
 <p> <b>Speakify</b> is an online language-learning platform designed to help learners explore and master new languages in a simple, fun and interactive way.</p>
@@ -67,7 +67,7 @@ ul {
 
 
 <div class ="content-box">
-<div class= "vision">
+<div class= "vision reveal">
 <h1 style="font-family: note; font-size: 80px;" id="vision">Vision</h1>
 <p>To become a trusted and inspiring language-learning platform that empowers people around the world to communicate confidently and connect across cultures.</p>
 </div>
@@ -77,7 +77,7 @@ ul {
 
 
 <div class ="content-box">
-<div class= "Mission">
+<div class= "Mission reveal">
 <h1  style="font-family: note; font-size: 80px;"id="Mission">Mission</h1>
 <ul>
 <li>To provide accessible and engaging language-learning resources for learners of all levels</li><br>
@@ -92,7 +92,7 @@ ul {
 
 
 <div class ="content-box">
-<div class= "team">
+<div class= "team reveal">
 <h1 style="font-family: note; font-size: 80px;" id="team">Meet the team</h1>
 <p>Track Your Progress</p>
 <p>Track Your Progress</p>
@@ -103,6 +103,30 @@ ul {
 <img src="7.png" class="center-img">
 <br>
 
+
+  <script>
+  const reveals = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    },
+    {
+      threshold: 0.2
+    }
+  );
+
+  reveals.forEach((reveal) => {
+    observer.observe(reveal);
+  });
+</script>
+
 <footer>
         &copy; 2026 SPEAKIFY
     </footer>
@@ -110,5 +134,6 @@ ul {
 </body>
 
 </html>
+
 
 
