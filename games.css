@@ -43,6 +43,23 @@ background-repeat:repeat;
   border-bottom: 2px solid #007bff;
 }
 
+/* Sign Up Button */
+.btn-signup {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-signup:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
 /* Logo Section */
 .logo {
   display: flex;
@@ -136,6 +153,7 @@ background-repeat:repeat;
 
 
 footer { background-color: #629BB5; color: white; clear: both; text-align: center; padding: 20px; font-family: Courier, monospace; }
+
 
 
 
