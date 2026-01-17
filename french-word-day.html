@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakify | French Word of the Day</title>
+    <style>
+        /* --- Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #447F98;
+            width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 80px;
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #447F98;
+        }
+
+        .logo img { height: 45px; }
+
+        .nav-links { list-style: none; display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: #447F98; }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .page-title {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .timer-box {
+            background: rgba(0,0,0,0.25);
+            color: #FFD700;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            font-size: 0.85rem;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            letter-spacing: 1px;
+        }
+
+        /* --- Flashcard --- */
+        .flashcard {
+            width: 100%;
+            max-width: 380px;
+            height: 480px;
+            perspective: 1000px;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+        }
+
+        .flashcard.flipped .card-inner { transform: rotateY(180deg); }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 30px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        }
+
+        .card-front { background: #ffffff; }
+        .card-back { background: #FFD700; color: #222; transform: rotateY(180deg); }
+
+        .emoji { font-size: 4.5rem; margin-bottom: 15px; }
+        .word-text { font-size: 2.2rem; font-weight: 800; color: #447F98; text-align: center; }
+        .type-tag { background: #eef5f8; color: #447F98; padding: 4px 12px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
+        
+        .meaning-label { font-weight: 800; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 12px; opacity: 0.6; }
+        .meaning-content { font-size: 1.25rem; font-weight: 700; text-align: center; line-height: 1.4; margin-bottom: 25px; }
+        .example-content { font-style: italic; font-size: 1.1rem; color: #222; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; line-height: 1.5; font-weight: 600; }
+
+        .btn-speak {
+            background: #447F98;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 25px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        .btn-speak:hover { transform: scale(1.05); }
+
+        .back-link { display: inline-block; margin-top: 30px; color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+
+        footer { text-align: center; padding: 25px; color: white; background: rgba(0,0,0,0.1); width: 100%; font-family: monospace; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="speakify.jpg" alt="Logo">
+            <span>SPEAKIFY</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="about.html">About Us</a></li>
+        </ul>
+    </nav>
+
+    <main class="main-content">
+        <h1 class="page-title">Mot du Jour</h1>
+        <div class="timer-box">NEXT FRENCH WORD IN: <span id="timer">00:00:00</span></div>
+
+        <div class="flashcard" onclick="this.classList.toggle('flipped')">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="emoji" id="word-emoji">🇫🇷</div>
+                    <div class="word-text" id="word-text">Chargement...</div>
+                    <div class="type-tag" id="word-type">French</div>
+                    <button class="btn-speak" onclick="event.stopPropagation(); speakWord()">Listen 🔊</button>
+                    <p style="margin-top: 30px; font-size: 0.75rem; color: #bbb; font-weight: bold;">TAP FOR ENGLISH MEANING</p>
+                </div>
+                <div class="card-back">
+                    <p class="meaning-label">ENGLISH MEANING</p>
+                    <p class="meaning-content" id="word-meaning"></p>
+                    <p class="meaning-label" style="margin-top:10px;">FRENCH EXAMPLE</p>
+                    <p class="example-content" id="word-example"></p>
+                    <button class="btn-speak" style="background: #222; margin-top:15px; padding: 8px 20px; font-size: 0.8rem;" onclick="event.stopPropagation(); speakSentence()">Listen Sentence 🔊</button>
+                </div>
+            </div>
+        </div>
+
+        <a href="french-menu.html" class="back-link">← Retour au Menu</a>
+    </main>
+
+    <footer>&copy; 2026 SPEAKIFY | FRENCH EDITION</footer>
+
+    <script>
+        const frenchData = [
+            { w: "Épanouir", t: "Verb", m: "To flourish or reach full happiness.", e: "Elle s'est épanouie dans son nouveau travail.", em: "🌸" },
+            { w: "Éphémère", t: "Adjective", m: "Lasting for a very short time.", e: "La beauté des fleurs est souvent éphémère.", em: "🦋" },
+            { w: "Bienveillance", t: "Noun", m: "Kindness or a well-meaning attitude.", e: "Il nous a accueillis avec beaucoup de bienveillance.", em: "🤝" },
+            { w: "Incontournable", t: "Adjective", m: "Unmissable or unavoidable.", e: "Paris est une étape incontournable de votre voyage.", em: "📍" },
+            { w: "Dépaysement", t: "Noun", m: "The feeling of being in a new scenery.", e: "Ce voyage nous a offert un dépaysement total.", em: "✈️" },
+            { w: "Flâner", t: "Verb", m: "To stroll or wander aimlessly.", e: "J'adore flâner dans les rues de Paris.", em: "🚶‍♂️" },
+            { w: "Éclatant", t: "Adjective", m: "Brilliant, dazzling, or very bright.", e: "Elle porte une robe d'un rouge éclatant.", em: "✨" },
+            { w: "Merveille", t: "Noun", m: "A marvel or something wonderful.", e: "Le Louvre est une merveille architecturale.", em: "🏛️" },
+            { w: "Coup de foudre", t: "Expression", m: "Love at first sight.", e: "Pour eux, ce fut un véritable coup de foudre.", em: "⚡❤️" },
+            { w: "Bisous", t: "Noun", m: "Kisses (informal way to say goodbye).", e: "Allez, je dois y aller. Bisous !", em: "😘" },
+            { w: "Petit ami", t: "Noun", m: "Boyfriend.", e: "Elle a présenté son petit ami à ses parents.", em: "👦" },
+            { w: "Petite amie", t: "Noun", m: "Girlfriend.", e: "Il a acheté des fleurs pour sa petite amie.", em: "👧" },
+            { w: "Chouchou", t: "Noun", m: "Teacher's pet / Favorite.", e: "Il a toujours été le chouchou du professeur.", em: "🥇" },
+            { w: "Bouquin", t: "Slang", m: "A book.", e: "Je suis en train de lire un super bouquin.", em: "📖" },
+            { w: "Boulot", t: "Slang", m: "Work or job.", e: "J'ai trop de boulot en ce moment.", em: "💼" },
+            { w: "Ouf", t: "Verlan Slang", m: "Crazy (reverse of 'fou').", e: "C'est un truc de ouf !", em: "🤪" },
+            { w: "Meuf", t: "Verlan Slang", m: "Woman / Girl / Girlfriend.", e: "Regarde cette meuf, elle est trop stylée.", em: "👩" },
+            { w: "Grave", t: "Adverb", m: "Totally / Seriously.", e: "C'était grave bien hier soir !", em: "🤘" },
+            { w: "Santé", t: "Noun", m: "Health / Cheers!", e: "À votre santé ! Buvez avec modération.", em: "🥂" },
+            { w: "Franglo", t: "Noun", m: "A mix of French and English.", e: "Certains jeunes parlent un peu franglais.", em: "🗣️" },
+            { w: "Gourmand", t: "Adjective", m: "Someone who loves good food.", e: "Il est très gourmand, il adore les gâteaux.", em: "🍰" },
+            { w: "Liberté", t: "Noun", m: "Freedom.", e: "La liberté est une valeur fondamentale.", em: "🗽" },
+            { w: "Égalité", t: "Noun", m: "Equality.", e: "Nous luttons pour l'égalité des droits.", em: "⚖️" },
+            { w: "Fraternité", t: "Noun", m: "Brotherhood.", e: "La fraternité unit les citoyens.", em: "🤝" },
+            { w: "Amour", t: "Noun", m: "Love.", e: "L'amour est plus fort que tout.", em: "❤️" },
+            { w: "Espoir", t: "Noun", m: "Hope.", e: "Il ne faut jamais perdre espoir.", em: "🌅" },
+            { w: "Courage", t: "Noun", m: "Courage / Bravery.", e: "Bon courage pour ton examen !", em: "🦁" },
+            { w: "Rêve", t: "Noun", m: "Dream.", e: "Fais de beaux rêves ce soir.", em: "🌙" },
+            { w: "Soleil", t: "Noun", m: "Sun.", e: "Le soleil brille aujourd'hui.", em: "☀️" },
+            { w: "Lune", t: "Noun", m: "Moon.", e: "La lune est pleine ce soir.", em: "🌑" },
+            { w: "Étoile", t: "Noun", m: "Star.", e: "Regarde toutes ces étoiles !", em: "⭐" },
+            { w: "Ciel", t: "Noun", m: "Sky.", e: "Le ciel est bleu azur.", em: "☁️" },
+            { w: "Mer", t: "Noun", m: "Sea.", e: "L'eau de la mer est très froide.", em: "🌊" },
+            { w: "Montagne", t: "Noun", m: "Mountain.", e: "J'aime faire du ski à la montagne.", em: "🏔️" },
+            { w: "Forêt", t: "Noun", m: "Forest.", e: "On a fait une balade en forêt.", em: "🌲" },
+            { w: "Fleur", t: "Noun", m: "Flower.", e: "Cette fleur sent très bon.", em: "🌻" },
+            { w: "Arbre", t: "Noun", m: "Tree.", e: "Cet arbre est centenaire.", em: "🌳" },
+            { w: "Oiseau", t: "Noun", m: "Bird.", e: "L'oiseau chante sur la branche.", em: "🐦" },
+            { w: "Chat", t: "Noun", m: "Cat.", e: "Le chat dort sur le canapé.", em: "🐱" },
+            { w: "Chien", t: "Noun", m: "Dog.", e: "Le chien aboie quand on sonne.", em: "🐶" },
+            { w: "Musique", t: "Noun", m: "Music.", e: "La musique adoucit les mœurs.", em: "🎶" },
+            { w: "Danse", t: "Noun", m: "Dance.", e: "Elle prend des cours de danse.", em: "💃" },
+            { w: "Voyage", t: "Noun", m: "Travel / Trip.", e: "Bon voyage et amuse-toi bien !", em: "🌍" },
+            { w: "Aventure", t: "Noun", m: "Adventure.", e: "L'aventure nous attend !", em: "🤠" },
+            { w: "Sourire", t: "Verb/Noun", m: "To smile / A smile.", e: "Un sourire ne coûte rien.", em: "😊" },
+            { w: "Rire", t: "Verb/Noun", m: "To laugh / Laughter.", e: "Rire est bon pour la santé.", em: "😂" },
+            { w: "Plaisir", t: "Noun", m: "Pleasure / Delight.", e: "C'est un plaisir de vous voir.", em: "🎁" },
+            { w: "Bonheur", t: "Noun", m: "Happiness.", e: "Je vous souhaite tout le bonheur du monde.", em: "🍀" },
+            { w: "Paix", t: "Noun", m: "Peace.", e: "Nous voulons vivre en paix.", em: "🕊️" },
+            { w: "Amitié", t: "Noun", m: "Friendship.", e: "Notre amitié dure depuis dix ans.", em: "👫" },
+            { w: "Famille", t: "Noun", m: "Family.", e: "La famille est très importante.", em: "🏠" },
+            { w: "Enfant", t: "Noun", m: "Child.", e: "L'enfant joue dans le jardin.", em: "👶" },
+            { w: "Vie", t: "Noun", m: "Life.", e: "La vie est belle !", em: "🌈" },
+            { w: "Temps", t: "Noun", m: "Time / Weather.", e: "Le temps passe trop vite.", em: "⏳" },
+            { w: "Monde", t: "Noun", m: "World.", e: "Il y a beaucoup de monde ici.", em: "🗺️" },
+            { w: "Vérité", t: "Noun", m: "Truth.", e: "La vérité finit toujours par sortir.", em: "💎" },
+            { w: "Force", t: "Noun", m: "Strength / Force.", e: "Que la force soit avec toi.", em: "💪" },
+            { w: "Lumière", t: "Noun", m: "Light.", e: "Éteins la lumière avant de partir.", em: "💡" },
+            { w: "Ombre", t: "Noun", m: "Shadow.", e: "Il fait frais à l'ombre.", em: "👤" },
+            { w: "Feu", t: "Noun", m: "Fire.", e: "Le feu brûle dans la cheminée.", em: "🔥" },
+            { w: "Eau", t: "Noun", m: "Water.", e: "Je bois un grand verre d'eau.", em: "💧" },
+            { w: "Air", t: "Noun", m: "Air.", e: "L'air pur de la campagne.", em: "💨" },
+            { w: "Terre", t: "Noun", m: "Earth / Ground.", e: "La Terre est ronde.", em: "🌍" },
+            { w: "Cœur", t: "Noun", m: "Heart.", e: "Écoute ton cœur.", em: "❤️" },
+            { w: "Âme", t: "Noun", m: "Soul.", e: "Ils sont comme deux âmes sœurs.", em: "✨" },
+            { w: "Esprit", t: "Noun", m: "Spirit / Mind.", e: "Gardez l'esprit ouvert.", em: "🧠" },
+            { w: "Corps", t: "Noun", m: "Body.", e: "Le corps humain est complexe.", em: "🧍" },
+            { w: "Main", t: "Noun", m: "Hand.", e: "Donne-moi la main.", em: "🤚" },
+            { w: "Oeil", t: "Noun", m: "Eye.", e: "L'œil est le miroir de l'âme.", em: "👁️" },
+            { w: "Voix", t: "Noun", m: "Voice.", e: "Elle a une voix magnifique.", em: "🎤" },
+            { w: "Parole", t: "Noun", m: "Word / Speech.", e: "Il a tenu sa parole.", em: "🗣️" },
+            { w: "Silence", t: "Noun", m: "Silence.", e: "Le silence est d'or.", em: "🤫" },
+            { w: "Histoire", t: "Noun", m: "History / Story.", e: "Raconte-moi une histoire.", em: "📚" },
+            { w: "Livre", t: "Noun", m: "Book.", e: "Ce livre est passionnant.", em: "📖" },
+            { w: "Image", t: "Noun", m: "Image / Picture.", e: "Une image vaut mille mots.", em: "🖼️" },
+            { w: "Couleur", t: "Noun", m: "Color.", e: "Quelle est ta couleur préférée ?", em: "🎨" },
+            { w: "Forme", t: "Noun", m: "Shape / Form.", e: "Il est en pleine forme.", em: "🔷" },
+            { w: "Nombre", t: "Noun", m: "Number.", e: "Un grand nombre de personnes.", em: "🔢" },
+            { w: "Place", t: "Noun", m: "Place / Square.", e: "Rendez-vous sur la place.", em: "⛲" },
+            { w: "Route", t: "Noun", m: "Road.", e: "La route est longue.", em: "🛣️" },
+            { w: "Ville", t: "Noun", m: "City.", e: "J'habite dans une grande ville.", em: "🏙️" },
+            { w: "Village", t: "Noun", m: "Village.", e: "C'est un petit village calme.", em: "🏘️" },
+            { w: "Maison", t: "Noun", m: "House.", e: "Bienvenue dans ma maison.", em: "🏠" },
+            { w: "Porte", t: "Noun", m: "Door.", e: "Ferme la porte derrière toi.", em: "🚪" },
+            { w: "Fenêtre", t: "Noun", m: "Window.", e: "Regarde par la fenêtre.", em: "🪟" },
+            { w: "Table", t: "Noun", m: "Table.", e: "Le dîner est sur la table.", em: "🍽️" },
+            { w: "Chaise", t: "Noun", m: "Chair.", e: "Assieds-toi sur cette chaise.", em: "🪑" },
+            { w: "Lit", t: "Noun", m: "Bed.", e: "Je vais me coucher dans mon lit.", em: "🛏️" },
+            { w: "Pain", t: "Noun", m: "Bread.", e: "J'achète du pain frais.", em: "🥖" },
+            { w: "Vin", t: "Noun", m: "Wine.", e: "Un bon verre de vin rouge.", em: "🍷" },
+            { w: "Fromage", t: "Noun", m: "Cheese.", e: "La France est célèbre pour ses fromages.", em: "🧀" },
+            { w: "Café", t: "Noun", m: "Coffee.", e: "Un café s'il vous plaît.", em: "☕" },
+            { w: "Thé", t: "Noun", m: "Tea.", e: "Je préfère le thé au café.", em: "🍵" },
+            { w: "Chocolat", t: "Noun", m: "Chocolate.", e: "Le chocolat belge est délicieux.", em: "🍫" },
+            { w: "Pomme", t: "Noun", m: "Apple.", e: "Une pomme par jour...", em: "🍎" },
+            { w: "Manger", t: "Verb", m: "To eat.", e: "J'adore manger des croissants.", em: "🥐" },
+            { w: "Boire", t: "Verb", m: "To drink.", e: "Il faut boire beaucoup d'eau.", em: "🥤" },
+            { w: "Dormir", t: "Verb", m: "To sleep.", e: "J'ai besoin de dormir un peu.", em: "💤" },
+            { w: "Français", t: "Noun/Adj", m: "French.", e: "Le français est une belle langue.", em: "🇫🇷" }
+        ];
+
+        let currentFrenchWord = "";
+        let currentFrenchSentence = "";
+
+        function updateContent() {
+            const now = new Date();
+            const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
+            const today = frenchData[dayOfYear % frenchData.length];
+
+            document.getElementById('word-emoji').innerText = today.em;
+            document.getElementById('word-text').innerText = today.w;
+            document.getElementById('word-type').innerText = today.t;
+            document.getElementById('word-meaning').innerText = today.m;
+            document.getElementById('word-example').innerText = `"${today.e}"`;
+            
+            currentFrenchWord = today.w;
+            currentFrenchSentence = today.e;
+        }
+
+        function speakWord() {
+            window.speechSynthesis.cancel();
+            const msg = new SpeechSynthesisUtterance(currentFrenchWord);
+            msg.lang = 'fr-FR';
+            msg.rate = 0.8;
+            window.speechSynthesis.speak(msg);
+        }
+
+        function speakSentence() {
+            window.speechSynthesis.cancel();
+            const msg = new SpeechSynthesisUtterance(currentFrenchSentence);
+            msg.lang = 'fr-FR';
+            msg.rate = 0.8;
+            window.speechSynthesis.speak(msg);
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(now.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const diff = tomorrow - now;
+            const h = Math.floor(diff / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('timer').innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+        }
+
+        setInterval(updateTimer, 1000);
+        updateContent();
+        updateTimer();
+    </script>
+</body>
+</html>
