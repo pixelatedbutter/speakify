@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakify | All Alphabets</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="speakify.jpg" alt="Logo">
+            <span>SPEAKIFY</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="japanese-menu.html" class="active">Japanese Menu</a></li>
+        </ul>
+    </nav>
+
+    <header class="video-header">
+        <h1>JAPANESE ALPHABET</h1>
+        <p>Master all 46 Hiragana and Katakana characters! 🇯🇵</p>
+    </header>
+
+    <main class="alphabet-wrapper">
+        <div class="tabs">
+            <button class="tab-btn active" id="btn-hira" onclick="showSection('hiragana')">Hiragana</button>
+            <button class="tab-btn" id="btn-kata" onclick="showSection('katakana')">Katakana</button>
+        </div>
+
+        <section id="hiragana" class="char-section active">
+            <div class="char-grid" id="hiragana-grid"></div>
+        </section>
+
+        <section id="katakana" class="char-section">
+            <div class="char-grid" id="katakana-grid"></div>
+        </section>
+
+        <a href="japanese-menu.html" class="back-link">← Back to Menu</a>
+    </main>
+
+    <footer>&copy; 2026 SPEAKIFY</footer>
+
+    <script>
+        // FULL LIST OF 46 CHARACTERS
+        const hiraData = [
+            ['あ','a'],['い','i'],['う','u'],['え','e'],['お','o'],
+            ['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko'],
+            ['さ','sa'],['し','shi'],['す','su'],['せ','se'],['そ','so'],
+            ['た','ta'],['ち','chi'],['つ','tsu'],['て','te'],['と','to'],
+            ['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no'],
+            ['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho'],
+            ['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo'],
+            ['や','ya'],['ゆ','yu'],['よ','yo'],
+            ['ら','ra'],['り','ri'],['る','ru'],['れ','re'],['ろ','ro'],
+            ['わ','wa'],['を','wo'],['ん','n']
+        ];
+
+        const kataData = [
+            ['ア','a'],['イ','i'],['ウ','u'],['エ','e'],['オ','o'],
+            ['カ','ka'],['キ','ki'],['ク','ku'],['ケ','ke'],['コ','ko'],
+            ['サ','sa'],['シ','shi'],['ス','su'],['セ','se'],['ソ','so'],
+            ['タ','ta'],['チ','chi'],['ツ','tsu'],['テ','te'],['ト','to'],
+            ['ナ','na'],['ニ','ni'],['ヌ','nu'],['ネ','ne'],['ノ','no'],
+            ['ハ','ha'],['ヒ','hi'],['フ','fu'],['ヘ','he'],['ホ','ho'],
+            ['マ','ma'],['ミ','mi'],['ム','mu'],['メ','me'],['モ','mo'],
+            ['ヤ','ya'],['ユ','yu'],['ヨ','yo'],
+            ['ラ','ra'],['リ','ri'],['ル','ru'],['レ','re'],['ロ','ro'],
+            ['ワ','wa'],['ヲ','wo'],['ン','n']
+        ];
+
+        function createGrid(data, gridId) {
+            const grid = document.getElementById(gridId);
+            data.forEach(([char, romaji]) => {
+                const card = document.createElement('div');
+                card.className = 'alphabet-card';
+                card.innerHTML = `
+                    <div class="card-circle">${char}</div>
+                    <div class="card-info">
+                        <h3>${char}</h3>
+                        <p>${romaji.toUpperCase()}</p>
+                    </div>
+                    <div class="audio-btn">🔊</div>
+                `;
+                card.onclick = () => speak(char);
+                grid.appendChild(card);
+            });
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = 'ja-JP';
+            uttr.volume = 1.0; // LOUD
+            uttr.rate = 0.8;
+            window.speechSynthesis.speak(uttr);
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.char-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'hiragana') document.getElementById('btn-hira').classList.add('active');
+            else document.getElementById('btn-kata').classList.add('active');
+        }
+
+        createGrid(hiraData, 'hiragana-grid');
+        createGrid(kataData, 'katakana-grid');
+    </script>
+</body>
+</html>
