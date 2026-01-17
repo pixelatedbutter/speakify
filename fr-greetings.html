@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakify | French Greetings</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="speakify.jpg" alt="Logo">
+            <span>SPEAKIFY</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="french-menu.html" class="active">French Menu</a></li>
+        </ul>
+    </nav>
+
+    <header class="video-header">
+        <h1>FRENCH GREETINGS</h1>
+        <p>Tap any card to hear the native pronunciation! 🇫🇷</p>
+    </header>
+
+    <main class="main-content greetings-page">
+        <div class="greetings-container" id="greetings-grid">
+            </div>
+
+        <a href="french-menu.html" class="back-link">← Back to Menu</a>
+    </main>
+
+    <footer>&copy; 2026 SPEAKIFY</footer>
+
+    <script>
+        const greetingsData = [
+            
+    { fr: "Bonjour", pr: "Bon-zhoor", en: "Hello / Good Morning", emo: "👋" },
+    { fr: "Salut", pr: "Sa-loo", en: "Hi / Bye", emo: "✨" },
+    { fr: "Bonsoir", pr: "Bon-swar", en: "Good Evening", emo: "🌙" },
+    { fr: "Bonne nuit", pr: "Bon nwee", en: "Good Night", emo: "😴" },
+    { fr: "Merci", pr: "Mer-see", en: "Thank You", emo: "🙏" },
+    { fr: "S'il vous plaît", pr: "Seel voo play", en: "Please", emo: "🥺" },
+    { fr: "Pardon", pr: "Par-don", en: "Excuse Me / Sorry", emo: "🙇‍♂️" },
+    { fr: "Oui", pr: "Wee", en: "Yes", emo: "✅" },
+    { fr: "Non", pr: "Non", en: "No", emo: "❌" },
+    { fr: "Enchanté", pr: "On-shon-tay", en: "Nice to meet you", emo: "🤝" },
+    { fr: "Au revoir", pr: "O-rev-war", en: "Goodbye", emo: "🎈" },
+    { fr: "À plus tard", pr: "Ah ploo tar", en: "See you later", emo: "✌️" },
+    { fr: "Bon appétit", pr: "Bon ah-pay-tee", en: "Enjoy your meal", emo: "🍱" },
+    { fr: "Ça va ?", pr: "Sah vah?", en: "How are you?", emo: "😊" },
+    { fr: "Très bien", pr: "Tray bee-en", en: "Very well", emo: "👌" },
+    { fr: "Félicitations", pr: "Fay-lee-see-ta-syon", en: "Congratulations", emo: "🎉" },
+    { fr: "Bonne chance", pr: "Bon shons", en: "Good luck", emo: "🔥" },
+    { fr: "Allô", pr: "Ah-lo", en: "Hello (on phone)", emo: "📞" },
+    { fr: "Je comprends", pr: "Zhe com-pron", en: "I understand", emo: "💡" },
+    { fr: "D'accord", pr: "Da-kor", en: "Okay / Agreed", emo: "👍" },
+    { fr: "Monsieur", pr: "Me-syuh", en: "Mister", emo: "👨" },
+    { fr: "Madame", pr: "Ma-dam", en: "Madam", emo: "👩" },
+    { fr: "Je m'appelle...", pr: "Zhe ma-pel", en: "My name is...", emo: "📛" },
+    { fr: "Aidez-moi", pr: "Ay-day mwa", en: "Help me", emo: "🆘" },
+    { fr: "Comment allez-vous ?", pr: "Ko-mon ta-lay voo?", en: "How are you? (Formal)", emo: "🤝" }
+        ];
+
+        function createGreetings() {
+            const grid = document.getElementById('greetings-grid');
+            greetingsData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'greeting-card';
+                card.innerHTML = `
+                    <div class="emoji-box">${item.emo}</div>
+                    <div class="card-content">
+                        <h3 class="jp-text">${item.fr}</h3>
+                        <p class="romaji-text">${item.pr}</p>
+                        <p class="en-text">${item.en}</p>
+                    </div>
+                `;
+                card.onclick = () => speak(item.fr);
+                grid.appendChild(card);
+            });
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = 'fr-FR'; // French voice engine
+            uttr.volume = 1.0;
+            uttr.rate = 0.85; // Natural Parisian speed
+            window.speechSynthesis.speak(uttr);
+        }
+
+        document.addEventListener('DOMContentLoaded', createGreetings);
+    </script>
+</body>
+</html>

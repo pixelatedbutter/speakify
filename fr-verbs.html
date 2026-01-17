@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakify | Verbs & Adjectives</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="speakify.jpg" alt="Logo">
+            <span>SPEAKIFY</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="french-menu.html" class="active">French Menu</a></li>
+        </ul>
+    </nav>
+
+    <header class="video-header">
+        <h1>VERBS & ADJECTIVES</h1>
+        <p>Master daily actions and descriptions in French! 🇫🇷</p>
+    </header>
+
+    <main class="main-content">
+        <div class="tabs">
+            <button class="tab-btn active" id="btn-verbs" onclick="showSection('verbs-section')">Action Verbs</button>
+            <button class="tab-btn" id="btn-adj" onclick="showSection('adj-section')">Adjectives</button>
+        </div>
+
+        <section id="verbs-section" class="char-section active">
+            <div class="greetings-container" id="verbs-grid"></div>
+        </section>
+
+        <section id="adj-section" class="char-section">
+            <div class="greetings-container" id="adj-grid"></div>
+        </section>
+
+        <a href="french-menu.html" class="back-link">← Back to Menu</a>
+    </main>
+
+    <footer>&copy; 2026 SPEAKIFY</footer>
+
+    <script>
+        const verbsData = [
+            { fr: "Manger", pr: "Mon-zhay", en: "To Eat", emo: "🍱" },
+            { fr: "Boire", pr: "Bwar", en: "To Drink", emo: "🥤" },
+            { fr: "Dormir", pr: "Dor-meer", en: "To Sleep", emo: "💤" },
+            { fr: "Se réveiller", pr: "Se ray-vay-yay", en: "To Wake up", emo: "⏰" },
+            { fr: "Aller", pr: "Ah-lay", en: "To Go", emo: "🚶‍♂️" },
+            { fr: "Venir", pr: "Ve-neer", en: "To Come", emo: "🏃‍♀️" },
+            { fr: "Voir", pr: "Vwar", en: "To See", emo: "👀" },
+            { fr: "Écouter", pr: "Ay-koo-tay", en: "To Listen", emo: "🎧" },
+            { fr: "Écrire", pr: "Ay-kreer", en: "To Write", emo: "✍️" },
+            { fr: "Lire", pr: "Leer", en: "To Read", emo: "📖" },
+            { fr: "Parler", pr: "Par-lay", en: "To Speak", emo: "🗣️" },
+            { fr: "Acheter", pr: "Ash-tay", en: "To Buy", emo: "🛒" },
+            { fr: "Étudier", pr: "Ay-too-dyay", en: "To Study", emo: "📚" },
+            { fr: "Jouer", pr: "Zhoo-ay", en: "To Play", emo: "🎮" },
+            { fr: "Faire", pr: "Fair", en: "To Do / Make", emo: "✨" }
+        ];
+
+        const adjData = [
+            { fr: "Bon / Bonne", pr: "Bon / Bonn", en: "Good", emo: "👍" },
+            { fr: "Mauvais", pr: "Mo-vay", en: "Bad", emo: "👎" },
+            { fr: "Grand", pr: "Gron", en: "Big / Tall", emo: "🐘" },
+            { fr: "Petit", pr: "Pe-tee", en: "Small", emo: "🐭" },
+            { fr: "Amusant", pr: "Ah-moo-zon", en: "Fun", emo: "🎡" },
+            { fr: "Délicieux", pr: "Day-lee-syuh", en: "Delicious", emo: "😋" },
+            { fr: "Chaud", pr: "Sho", en: "Hot", emo: "🔥" },
+            { fr: "Froid", pr: "Frwa", en: "Cold", emo: "❄️" },
+            { fr: "Cher", pr: "Shair", en: "Expensive", emo: "💰" },
+            { fr: "Bon marché", pr: "Bon mar-shay", en: "Cheap", emo: "🏷️" },
+            { fr: "Rapide", pr: "Rah-peed", en: "Fast", emo: "🏎️" },
+            { fr: "Lent", pr: "Lon", en: "Slow", emo: "🐢" },
+            { fr: "Heureux", pr: "Uh-ruh", en: "Happy", emo: "😊" },
+            { fr: "Triste", pr: "Treest", en: "Sad", emo: "😢" },
+            { fr: "Beau / Belle", pr: "Bo / Bell", en: "Beautiful", emo: "✨" }
+        ];
+
+        function populateGrid(data, gridId) {
+            const grid = document.getElementById(gridId);
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'greeting-card';
+                card.innerHTML = `
+                    <div class="emoji-box">${item.emo}</div>
+                    <div class="card-content">
+                        <h3 class="jp-text">${item.fr}</h3>
+                        <p class="romaji-text">${item.pr}</p>
+                        <p class="en-text">${item.en}</p>
+                    </div>
+                `;
+                card.onclick = () => speak(item.fr);
+                grid.appendChild(card);
+            });
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = 'fr-FR'; // French Accent
+            uttr.rate = 0.85;
+            window.speechSynthesis.speak(uttr);
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.char-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'verbs-section') document.getElementById('btn-verbs').classList.add('active');
+            else document.getElementById('btn-adj').classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateGrid(verbsData, 'verbs-grid');
+            populateGrid(adjData, 'adj-grid');
+        });
+    </script>
+</body>
+</html>

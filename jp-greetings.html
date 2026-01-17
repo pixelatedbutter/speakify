@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakify | Japanese Greetings</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="speakify.jpg" alt="Logo">
+            <span>SPEAKIFY</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="japanese-menu.html" class="active">Japanese Menu</a></li>
+        </ul>
+    </nav>
+
+    <header class="video-header">
+        <h1>JAPANESE GREETINGS</h1>
+        <p>Tap any card to hear the native pronunciation! 🇯🇵</p>
+    </header>
+
+    <main class="main-content greetings-page">
+        <div class="greetings-container" id="greetings-grid">
+            </div>
+
+        <a href="japanese-menu.html" class="back-link">← Back to Menu</a>
+    </main>
+
+    <footer>&copy; 2026 SPEAKIFY</footer>
+
+    <script>
+        const greetingsData = [
+            { jp: "こんにちは", ro: "Konnichiwa", en: "Hello", emo: "👋" },
+            { jp: "おはよう", ro: "Ohayou", en: "Good Morning", emo: "☀️" },
+            { jp: "こんばんは", ro: "Konbanwa", en: "Good Evening", emo: "🌙" },
+            { jp: "おやすみ", ro: "Oyasumi", en: "Good Night", emo: "😴" },
+            { jp: "ありがとう", ro: "Arigatou", en: "Thank You", emo: "🙏" },
+            { jp: "すみません", ro: "Sumimasen", en: "Excuse Me / Sorry", emo: "🙇‍♂️" },
+            { jp: "ごめんなさい", ro: "Gomennasai", en: "I'm Sorry", emo: "🥺" },
+            { jp: "はい", ro: "Hai", en: "Yes", emo: "✅" },
+            { jp: "いいえ", ro: "Iie", en: "No", emo: "❌" },
+            { jp: "はじめまして", ro: "Hajimemashite", en: "Nice to meet you", emo: "🤝" },
+            { jp: "さようなら", ro: "Sayounara", en: "Goodbye", emo: "🎈" },
+            { jp: "またね", ro: "Mata ne", en: "See you later", emo: "✌️" },
+            { jp: "いただきます", ro: "Itadakimasu", en: "Let's eat", emo: "🍱" },
+            { jp: "ごちそうさま", ro: "Gochisousama", en: "Thanks for the food", emo: "🍵" },
+            { jp: "いってきます", ro: "Ittekimasu", en: "I'm leaving", emo: "🚶‍♂️" },
+            { jp: "ただいま", ro: "Tadaima", en: "I'm home", emo: "🏠" },
+            { jp: "お元気ですか", ro: "O-genki desu ka", en: "How are you?", emo: "😊" },
+            { jp: "大丈夫です", ro: "Daijoubu desu", en: "I'm okay", emo: "👌" },
+            { jp: "おめでとう", ro: "Omedetou", en: "Congratulations", emo: "🎉" },
+            { jp: "がんばって", ro: "Ganbatte", en: "Do your best", emo: "🔥" },
+            { jp: "もしもし", ro: "Moshi moshi", en: "Hello (on phone)", emo: "📞" },
+            { jp: "わかりました", ro: "Wakarimashita", en: "I understand", emo: "💡" }
+        ];
+
+        function createGreetings() {
+            const grid = document.getElementById('greetings-grid');
+            greetingsData.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'greeting-card';
+                card.innerHTML = `
+                    <div class="emoji-box">${item.emo}</div>
+                    <div class="card-content">
+                        <h3 class="jp-text">${item.jp}</h3>
+                        <p class="romaji-text">${item.ro}</p>
+                        <p class="en-text">${item.en}</p>
+                    </div>
+                `;
+                card.onclick = () => speak(item.jp);
+                grid.appendChild(card);
+            });
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = 'ja-JP';
+            uttr.volume = 1.0;
+            uttr.rate = 0.9;
+            window.speechSynthesis.speak(uttr);
+        }
+
+        document.addEventListener('DOMContentLoaded', createGreetings);
+    </script>
+</body>
+</html>
