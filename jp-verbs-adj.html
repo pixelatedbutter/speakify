@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speakify | Verbs & Adjectives</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="speakify.jpg" alt="Logo">
+            <span>SPEAKIFY</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="japanese-menu.html" class="active">Japanese Menu</a></li>
+        </ul>
+    </nav>
+
+    <header class="video-header">
+        <h1>VERBS & ADJECTIVES</h1>
+        <p>Master daily actions and descriptions! ⚡</p>
+    </header>
+
+    <main class="main-content">
+        <div class="tabs">
+            <button class="tab-btn active" id="btn-verbs" onclick="showSection('verbs-section')">Action Verbs</button>
+            <button class="tab-btn" id="btn-adj" onclick="showSection('adj-section')">Adjectives</button>
+        </div>
+
+        <section id="verbs-section" class="char-section active">
+            <div class="greetings-container" id="verbs-grid"></div>
+        </section>
+
+        <section id="adj-section" class="char-section">
+            <div class="greetings-container" id="adj-grid"></div>
+        </section>
+
+        <a href="japanese-menu.html" class="back-link">← Back to Menu</a>
+    </main>
+
+    <footer>&copy; 2026 SPEAKIFY</footer>
+
+    <script>
+        const verbsData = [
+            { jp: "たべる", ro: "Taberu", en: "To Eat", emo: "🍱" },
+            { jp: "のむ", ro: "Nomu", en: "To Drink", emo: "🥤" },
+            { jp: "ねる", ro: "Neru", en: "To Sleep", emo: "💤" },
+            { jp: "おきる", ro: "Okiru", en: "To Wake up", emo: "⏰" },
+            { jp: "いく", ro: "Iku", en: "To Go", emo: "🚶‍♂️" },
+            { jp: "くる", ro: "Kuru", en: "To Come", emo: "🏃‍♀️" },
+            { jp: "みる", ro: "Miru", en: "To See/Watch", emo: "👀" },
+            { jp: "きく", ro: "Kiku", en: "To Listen", emo: "🎧" },
+            { jp: "かく", ro: "Kaku", en: "To Write", emo: "✍️" },
+            { jp: "よむ", ro: "Yomu", en: "To Read", emo: "📖" },
+            { jp: "はなす", ro: "Hanasu", en: "To Speak", emo: "🗣️" },
+            { jp: "かう", ro: "Kau", en: "To Buy", emo: "🛒" },
+            { jp: "べんきょうする", ro: "Benkyou suru", en: "To Study", emo: "📚" },
+            { jp: "あそぶ", ro: "Asobu", en: "To Play", emo: "🎮" },
+            { jp: "する", ro: "Suru", en: "To Do", emo: "✨" }
+        ];
+
+        const adjData = [
+            { jp: "いい", ro: "Ii", en: "Good", emo: "👍" },
+            { jp: "わるい", ro: "Warui", en: "Bad", emo: "👎" },
+            { jp: "おおきい", ro: "Ookii", en: "Big", emo: "🐘" },
+            { jp: "ちいさい", ro: "Chiisai", en: "Small", emo: "🐭" },
+            { jp: "たのしい", ro: "Tanoshii", en: "Fun", emo: "🎡" },
+            { jp: "おいしい", ro: "Oishii", en: "Delicious", emo: "😋" },
+            { jp: "あつい", ro: "Atsui", en: "Hot", emo: "🔥" },
+            { jp: "さむい", ro: "Samui", en: "Cold", emo: "❄️" },
+            { jp: "たかい", ro: "Takai", en: "Expensive/High", emo: "💰" },
+            { jp: "やすい", ro: "Yasui", en: "Cheap", emo: "🏷️" },
+            { jp: "はやい", ro: "Hayai", en: "Fast", emo: "🏎️" },
+            { jp: "おそい", ro: "Osoi", en: "Slow", emo: "🐢" },
+            { jp: "うれしい", ro: "Ureshii", en: "Happy", emo: "😊" },
+            { jp: "かなしい", ro: "Kanashii", en: "Sad", emo: "😢" },
+            { jp: "きれい", ro: "Kirei", en: "Beautiful/Clean", emo: "✨" }
+        ];
+
+        function populateGrid(data, gridId) {
+            const grid = document.getElementById(gridId);
+            data.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'greeting-card';
+                card.innerHTML = `
+                    <div class="emoji-box">${item.emo}</div>
+                    <div class="card-content">
+                        <h3 class="jp-text">${item.jp}</h3>
+                        <p class="romaji-text">${item.ro}</p>
+                        <p class="en-text">${item.en}</p>
+                    </div>
+                `;
+                card.onclick = () => speak(item.jp);
+                grid.appendChild(card);
+            });
+        }
+
+        function speak(text) {
+            window.speechSynthesis.cancel();
+            const uttr = new SpeechSynthesisUtterance(text);
+            uttr.lang = 'ja-JP';
+            uttr.rate = 0.9;
+            window.speechSynthesis.speak(uttr);
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.char-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(id === 'verbs-section') document.getElementById('btn-verbs').classList.add('active');
+            else document.getElementById('btn-adj').classList.add('active');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            populateGrid(verbsData, 'verbs-grid');
+            populateGrid(adjData, 'adj-grid');
+        });
+    </script>
+</body>
+</html>
