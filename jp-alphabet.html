@@ -4,178 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | All Alphabets</title>
-    <style>
-        :root {
-            --primary: #ff4757;
-            --dark: #2f3542;
-            --light: #f1f2f6;
-            --white: #ffffff;
-            --shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
-        body {
-            font-family: 'Helvetica Neue', Arial, sans-serif;
-            margin: 0;
-            background-color: var(--light);
-            color: var(--dark);
-            line-height: 1.6;
-        }
-
-        /* Navigation */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--white);
-            padding: 10px 5%;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: bold;
-            font-size: 1.2rem;
-            color: var(--primary);
-        }
-
-        .logo img {
-            width: 35px;
-            height: 35px;
-            border-radius: 50%;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 15px;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-size: 0.9rem;
-            font-weight: 500;
-        }
-
-        .nav-links a.active {
-            color: var(--primary);
-        }
-
-        /* Header */
-        .video-header {
-            text-align: center;
-            padding: 40px 20px;
-            background: linear-gradient(135deg, #ff4757, #ff6b81);
-            color: white;
-        }
-
-        .video-header h1 { margin: 0; font-size: 2rem; }
-
-        /* Main Content */
-        .alphabet-wrapper {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 15px;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .tab-btn {
-            padding: 10px 25px;
-            border: 2px solid var(--primary);
-            background: transparent;
-            color: var(--primary);
-            cursor: pointer;
-            border-radius: 50px;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: white;
-        }
-
-        /* Grid */
-        .char-section { display: none; }
-        .char-section.active { display: block; }
-
-        .char-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr); /* Traditional 5-column Japanese layout */
-            gap: 12px;
-        }
-
-        /* Cards */
-        .alphabet-card {
-            background: var(--white);
-            padding: 15px 5px;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            cursor: pointer;
-            transition: transform 0.2s;
-            border: 1px solid #eee;
-        }
-
-        .alphabet-card:hover {
-            transform: scale(1.05);
-            border-color: var(--primary);
-        }
-
-        .card-circle {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: var(--primary);
-            margin-bottom: 5px;
-        }
-
-        .card-info p {
-            margin: 0;
-            color: #747d8c;
-            font-size: 0.8rem;
-            letter-spacing: 1px;
-        }
-
-        .audio-btn {
-            font-size: 0.7rem;
-            margin-top: 5px;
-            color: #ccc;
-        }
-
-        /* Empty slots for visual alignment */
-        .empty-slot { visibility: hidden; }
-
-        .back-link {
-            display: block;
-            text-align: center;
-            margin: 30px 0;
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: bold;
-        }
-
-        footer {
-            text-align: center;
-            padding: 20px;
-            font-size: 0.8rem;
-            color: #a4b0be;
-        }
-
-        @media (max-width: 500px) {
-            .char-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-    </style>
+    <link rel="stylesheet" href="style5.css">
 </head>
 <body>
 
@@ -193,7 +22,7 @@
 
     <header class="video-header">
         <h1>JAPANESE ALPHABET</h1>
-        <p>Master all 46 characters! 🇯🇵</p>
+        <p>Master all 46 Hiragana and Katakana characters! 🇯🇵</p>
     </header>
 
     <main class="alphabet-wrapper">
@@ -216,7 +45,7 @@
     <footer>&copy; 2026 SPEAKIFY</footer>
 
     <script>
-        // Organized by Gojūon order (A-I-U-E-O rows)
+        // FULL LIST OF 46 CHARACTERS
         const hiraData = [
             ['あ','a'],['い','i'],['う','u'],['え','e'],['お','o'],
             ['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko'],
@@ -225,10 +54,9 @@
             ['な','na'],['に','ni'],['ぬ','nu'],['ね','ne'],['の','no'],
             ['は','ha'],['ひ','hi'],['ふ','fu'],['へ','he'],['ほ','ho'],
             ['ま','ma'],['み','mi'],['む','mu'],['め','me'],['も','mo'],
-            ['や','ya'],['',''],['ゆ','yu'],['',''],['よ','yo'],
+            ['や','ya'],['ゆ','yu'],['よ','yo'],
             ['ら','ra'],['り','ri'],['る','ru'],['れ','re'],['ろ','ro'],
-            ['わ','wa'],['',''],['',''],['',''],['を','wo'],
-            ['ん','n']
+            ['わ','wa'],['を','wo'],['ん','n']
         ];
 
         const kataData = [
@@ -239,29 +67,25 @@
             ['ナ','na'],['ニ','ni'],['ヌ','nu'],['ネ','ne'],['ノ','no'],
             ['ハ','ha'],['ヒ','hi'],['フ','fu'],['ヘ','he'],['ホ','ho'],
             ['マ','ma'],['ミ','mi'],['ム','mu'],['メ','me'],['モ','mo'],
-            ['ヤ','ya'],['',''],['ユ','yu'],['',''],['ヨ','yo'],
+            ['ヤ','ya'],['ユ','yu'],['ヨ','yo'],
             ['ラ','ra'],['リ','ri'],['ル','ru'],['レ','re'],['ロ','ro'],
-            ['ワ','wa'],['',''],['',''],['',''],['ヲ','wo'],
-            ['ン','n']
+            ['ワ','wa'],['ヲ','wo'],['ン','n']
         ];
 
         function createGrid(data, gridId) {
             const grid = document.getElementById(gridId);
             data.forEach(([char, romaji]) => {
                 const card = document.createElement('div');
-                if (char === '') {
-                    card.className = 'empty-slot';
-                } else {
-                    card.className = 'alphabet-card';
-                    card.innerHTML = `
-                        <div class="card-circle">${char}</div>
-                        <div class="card-info">
-                            <p>${romaji.toUpperCase()}</p>
-                        </div>
-                        <div class="audio-btn">CLICK TO HEAR</div>
-                    `;
-                    card.onclick = () => speak(char);
-                }
+                card.className = 'alphabet-card';
+                card.innerHTML = `
+                    <div class="card-circle">${char}</div>
+                    <div class="card-info">
+                        <h3>${char}</h3>
+                        <p>${romaji.toUpperCase()}</p>
+                    </div>
+                    <div class="audio-btn">🔊</div>
+                `;
+                card.onclick = () => speak(char);
                 grid.appendChild(card);
             });
         }
@@ -270,6 +94,7 @@
             window.speechSynthesis.cancel();
             const uttr = new SpeechSynthesisUtterance(text);
             uttr.lang = 'ja-JP';
+            uttr.volume = 1.0; // LOUD
             uttr.rate = 0.8;
             window.speechSynthesis.speak(uttr);
         }
@@ -287,4 +112,5 @@
     </script>
 </body>
 </html>
+
 
