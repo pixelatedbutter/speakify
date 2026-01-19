@@ -2,11 +2,70 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    
     <title>Speakify | Verbs & Adjectives</title>
     <link rel="stylesheet" href="style5.css">
     <link rel="stylesheet" href="style2.css">
     <link href="5.gif" rel="icon">
+    
+    <style>
+        /* --- Matches English Header Style --- */
+        .video-header {
+            padding: 80px 20px !important; 
+            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* --- Pill Box Styling (Same as English) --- */
+        .pill-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 10px 30px; 
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .pill.active {
+            background: white;
+            color: #447F98;
+            border-color: white;
+        }
+
+        .pill:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Logic to hide/show sections */
+        .char-section { display: none; }
+        .char-section.active { display: block; }
+        
+        /* Adds breathing room for the cards */
+        .main-content { padding-top: 40px !important; }
+
+        /* Ensuring Card Texts look clean */
+        .en-text { font-size: 0.85rem; color: #666; font-style: italic; }
+    </style>
 </head>
 <body>
 
@@ -25,14 +84,14 @@
     <header class="video-header">
         <h1>VERBS & ADJECTIVES</h1>
         <p>Master daily actions and descriptions in French! 🇫🇷</p>
+        
+        <div class="pill-container">
+            <button class="pill active" id="btn-verbs" onclick="showSection('verbs-section')">Action Verbs</button>
+            <button class="pill" id="btn-adj" onclick="showSection('adj-section')">Adjectives</button>
+        </div>
     </header>
 
     <main class="main-content">
-        <div class="tabs">
-            <button class="tab-btn active" id="btn-verbs" onclick="showSection('verbs-section')">Action Verbs</button>
-            <button class="tab-btn" id="btn-adj" onclick="showSection('adj-section')">Adjectives</button>
-        </div>
-
         <section id="verbs-section" class="char-section active">
             <div class="greetings-container" id="verbs-grid"></div>
         </section>
@@ -104,14 +163,14 @@
         function speak(text) {
             window.speechSynthesis.cancel();
             const uttr = new SpeechSynthesisUtterance(text);
-            uttr.lang = 'fr-FR'; // French Accent
+            uttr.lang = 'fr-FR';
             uttr.rate = 0.85;
             window.speechSynthesis.speak(uttr);
         }
 
         function showSection(id) {
             document.querySelectorAll('.char-section').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.pill').forEach(b => b.classList.remove('active'));
             document.getElementById(id).classList.add('active');
             if(id === 'verbs-section') document.getElementById('btn-verbs').classList.add('active');
             else document.getElementById('btn-adj').classList.add('active');
@@ -123,7 +182,7 @@
         });
     </script>
 </body>
-
 </html>
+
 
 
