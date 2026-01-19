@@ -2,7 +2,6 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    
     <title>Speakify | French Alphabet 🇫🇷</title>
     <link rel="stylesheet" href="style2.css">
     <link href="5.gif" rel="icon">
@@ -21,7 +20,6 @@
             flex-direction: column;
             min-height: 100vh;
         }
-
 
         /* --- 3. Grid Alphabet --- */
         .main-content {
@@ -112,11 +110,10 @@
     <main class="main-content">
         <div class="header-text">
             <h1>L'alphabet Français 🇫🇷</h1>
-            <p>Click to hear: <b>"A pour Avion"</b> (Paris Accent)</p>
+            <p>Click to hear: <b>"A pour Abeille"</b> (Paris Accent)</p>
         </div>
 
-        <div class="alphabet-grid" id="alphabetGrid">
-            </div>
+        <div class="alphabet-grid" id="alphabetGrid"></div>
 
         <a href="french-menu.html" class="back-btn">← Back to Menu</a>
     </main>
@@ -124,43 +121,43 @@
     <footer>&copy; 2026 SPEAKIFY </footer>
 
     <script>
-        // Data A to Z: French Word + English Translation
+        // Data A to Z
         const alphabetData = [
-    { l: 'A', e: '🐝', w: 'Abeille', p: 'Ah', t: 'Bee' },
-    { l: 'B', e: '🚢', w: 'Bateau', p: 'Bay', t: 'Boat' },
-    { l: 'C', e: '🎁', w: 'Cadeau', p: 'Say', t: 'Gift' },
-    { l: 'D', e: '🎲', w: 'Dé', p: 'Day', t: 'Dice' },
-    { l: 'E', e: '🌟', w: 'Étoile', p: 'Uh', t: 'Star' },
-    { l: 'F', e: '🔥', w: 'Feu', p: 'Ef', t: 'Fire' },
-    { l: 'G', e: '🦍', w: 'Gorille', p: 'Zhay', t: 'Gorilla' }, // Changed: Identical word
-    { l: 'H', e: '🦉', w: 'Hibou', p: 'Ash', t: 'Owl' },
-    { l: 'I', e: '🐜', w: 'Insecte', p: 'Ee', t: 'Insect' },
-    { l: 'J', e: '🪴', w: 'Jardin', p: 'Zhee', t: 'Garden' },
-    { l: 'K', e: '🐨', w: 'Koala', p: 'Kah', t: 'Koala' },
-    { l: 'L', e: '🌙', w: 'Lune', p: 'El', t: 'Moon' },
-    { l: 'M', e: '🏔️', w: 'Montagne', p: 'Em', t: 'Mountain' },
-    { l: 'N', e: '🏙️', w: 'Nuit', p: 'En', t: 'Night' }, 
-    { l: 'O', e: '🐦', w: 'Oiseau', p: 'Oh', t: 'Bird' },
-    { l: 'P', e: '🥖', w: 'Pain', p: 'Pay', t: 'Bread' },
-    { l: 'Q', e: '📊', w: 'Quota', p: 'Ku', t: 'Quota' }, // Changed: Identical word
-    { l: 'R', e: '👑', w: 'Roi', p: 'Air', t: 'King' },
-    { l: 'S', e: '🐍', w: 'Serpent', p: 'Es', t: 'Snake' },
-    { l: 'T', e: '🐯', w: 'Tigre', p: 'Tay', t: 'Tiger' },
-    { l: 'U', e: '🏭', w: 'Usine', p: 'Uuu', t: 'Factory' },
-    { l: 'V', e: '🌋', w: 'Volcan', p: 'Vay', t: 'Volcano' }, // Changed: Very similar
-    { l: 'W', e: '🌐', w: 'Web', p: 'Doobla-vay', t: 'Web' }, // Changed: Same word
-    { l: 'X', e: '🎷', w: 'Xylophone', p: 'Iks', t: 'Xylophone' },
-    { l: 'Y', e: '👁️', w: 'Yeux', p: 'Ee-grek', t: 'Eyes' },
-    { l: 'Z', e: '🦓', w: 'Zèbre', p: 'Zed', t: 'Zebra' } // Changed: Similar word
-];;
+            { l: 'A', e: '🐝', w: 'Abeille', p: 'Ah', t: 'Bee' },
+            { l: 'B', e: '🚢', w: 'Bateau', p: 'Bay', t: 'Boat' },
+            { l: 'C', e: '🎁', w: 'Cadeau', p: 'Say', t: 'Gift' },
+            { l: 'D', e: '🎲', w: 'Dé', p: 'Day', t: 'Dice' },
+            { l: 'E', e: '🌟', w: 'Étoile', p: 'Uh', t: 'Star' },
+            { l: 'F', e: '🔥', w: 'Feu', p: 'Ef', t: 'Fire' },
+            { l: 'G', e: '🦍', w: 'Gorille', p: 'Zhay', t: 'Gorilla' }, 
+            { l: 'H', e: '🦉', w: 'Hibou', p: 'Ash', t: 'Owl' },
+            { l: 'I', e: '🐜', w: 'Insecte', p: 'Ee', t: 'Insect' },
+            { l: 'J', e: '🪴', w: 'Jardin', p: 'Zhee', t: 'Garden' },
+            { l: 'K', e: '🐨', w: 'Koala', p: 'Kah', t: 'Koala' },
+            { l: 'L', e: '🌙', w: 'Lune', p: 'El', t: 'Moon' },
+            { l: 'M', e: '🏔️', w: 'Montagne', p: 'Em', t: 'Mountain' },
+            { l: 'N', e: '🏙️', w: 'Nuit', p: 'En', t: 'Night' }, 
+            { l: 'O', e: '🐦', w: 'Oiseau', p: 'Oh', t: 'Bird' },
+            { l: 'P', e: '🥖', w: 'Pain', p: 'Pay', t: 'Bread' },
+            { l: 'Q', e: '📊', w: 'Quota', p: 'Ku', t: 'Quota' }, 
+            { l: 'R', e: '👑', w: 'Roi', p: 'Air', t: 'King' },
+            { l: 'S', e: '🐍', w: 'Serpent', p: 'Es', t: 'Snake' },
+            { l: 'T', e: '🐯', w: 'Tigre', p: 'Tay', t: 'Tiger' },
+            { l: 'U', e: '🏭', w: 'Usine', p: 'Uuu', t: 'Factory' },
+            { l: 'V', e: '🌋', w: 'Volcan', p: 'Vay', t: 'Volcano' }, 
+            { l: 'W', e: '🌐', w: 'Web', p: 'Doobla-vay', t: 'Web' }, 
+            { l: 'X', e: '🎷', w: 'Xylophone', p: 'Iks', t: 'Xylophone' },
+            { l: 'Y', e: '👁️', w: 'Yeux', p: 'Ee-grek', t: 'Eyes' },
+            { l: 'Z', e: '🦓', w: 'Zèbre', p: 'Zed', t: 'Zebra' }
+        ];
 
         const grid = document.getElementById('alphabetGrid');
 
-        data.forEach(item => {
+        // FIXED: Using alphabetData instead of "data"
+        alphabetData.forEach(item => {
             const card = document.createElement('div');
             card.className = 'card';
             
-            // Text-to-Speech in French
             card.onclick = () => {
                 const talk = new SpeechSynthesisUtterance(`${item.l} pour ${item.w}`);
                 talk.lang = 'fr-FR'; 
@@ -179,6 +176,6 @@
         });
     </script>
 </body>
-
 </html>
+
 
