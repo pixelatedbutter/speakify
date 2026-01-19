@@ -50,6 +50,165 @@
     </div>
 
     <div class="hero-image">
+      <img src="speakify1.png" width="450px"; height="400px">
+    </div>
+</div>
+  </section>
+
+
+  <section class="features-section reveal">
+
+  <div class="features">
+    <div class="feature-box">
+  <img src="1.gif">
+  <p>Interactive Lessons</p>
+  </div>
+
+<div class="feature-box">
+  <img src="2.png">
+  <p>Fun Learning Games</p>
+  </div>
+
+<div class="feature-box">
+  <img src="3.png">
+  <p>Track Your Progress</p>
+  </div>
+ 
+<div class="feature-box">
+  <img src="4.gif">
+  <p>Learn Anywhere</p>
+  </div>
+
+  </div>
+</section>
+
+<div class ="content-box">
+<section class="courses reveal">
+  <h2>Courses</h2>
+
+  <div class="course-list">
+
+    <div class="dropdown">
+      <div class="course-card">English</div>
+      <div class="dropdown-content">
+<ul>
+        <li><a href="#">Basic to advanced communication</a></li>
+        <li><a href="#">Grammar, vocabulary & pronunciation</a></li>
+        <li><a href="#">Everyday conversations</a></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <div class="course-card">Japanese</div>
+      <div class="dropdown-content">
+<ul>
+        <li><a href="#">Hiragana, katakana & basic kanji</a></li>
+        <li><a href="#">Common phrases and sentence structure</a></li>
+        <li><a href="#">Speaking & listening practice</a></li>
+</ul>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <div class="course-card">French</div>
+      <div class="dropdown-content">
+<ul>
+       <li> <a href="#">Essential grammar and vocabulary</a></li>
+       <li> <a href="#">Pronunciation and accents</a></li>
+       <li> <a href="#">Daily conversation skills</a></li>
+</ul>
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+</section>
+
+
+  </div>
+</section>
+
+
+</div>
+  </section>
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class ="content-box">
+ <section class="how-it-works reveal">
+  <h2 class="how-title">How it works</h2>
+
+  <div class="how-steps">
+    <div class="how-step arrow">Sign Up</div>
+    <div class="how-step arrow">Choose Your Course</div>
+    <div class="how-step">Start Learning</div>
+  </div>
+
+
+</div>
+</section>
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+  
+
+
+<script>
+  const reveals = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+        } else {
+          entry.target.classList.remove("active");
+        }
+      });
+    },
+    {
+      threshold: 0.2
+    }
+  );
+
+  reveals.forEach((reveal) => {
+    observer.observe(reveal);
+  });
+</script>
+
+
+
+
+
+<footer>
+        &copy; 2026 SPEAKIFY
+    </footer>
+</body>
+</html><h2 style="font-family: jes; font-size: 60px;">
+  Your Journey to Better Communication
+</h2>
+
+<p style="font-family: swi; font-size: 40px;">
+  Fun, interactive lessons to boost your skills.
+</p>
+
+
+      
+        
+        <a href="language.html" class="button1">Start lesson</a>
+      
+    </div>
+
+    <div class="hero-image">
       <img src="SPEAKIFY1.png" width="450px"; height="400px">
     </div>
 </div>
@@ -149,4 +308,5 @@
     </footer>
 </body>
 </html>
+
 
