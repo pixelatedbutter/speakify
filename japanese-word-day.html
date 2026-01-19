@@ -4,29 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | Japanese Word of the Day</title>
+    
     <style>
-        /* --- 1. Global Reset & Theme --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        /* --- Custom Fonts (Matching your English Style) --- */
+        @font-face { font-family: 'swi'; src: url(swirly.otf); }
+        @font-face { font-family: 'note'; src: url(Notedry.ttf); }
+        @font-face { font-family: 'jes'; src: url(Jester.ttf); }
+
+        /* --- Global Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background-color: #f4f7f6;
-            min-height: 100vh;
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #447F98;
+            background-image: url('6.jpg'); 
+            background-repeat: repeat;
             overflow-x: hidden;
         }
 
-        /* --- 2. Navbar (Consistent with English/French) --- */
+        /* --- Navbar --- */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 5%;
+            padding: 10px 5%;
             height: 80px;
             background: #ffffff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -35,48 +39,14 @@
             z-index: 1000;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: #447F98;
-        }
-
-        .logo img { height: 45px; }
+        .logo { display: flex; align-items: center; font-weight: bold; color: #1e73be; }
+        .logo img { height: 100px; width: auto; object-fit: contain; }
 
         .nav-links { list-style: none; display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: #447F98; }
+        .nav-links a:hover, .nav-links a.active { color: #447F98; }
 
-        /* --- 3. Header (Teal Gradient) --- */
-        .video-header {
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
-            text-align: center;
-            color: white;
-        }
-
-        .video-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 800;
-        }
-
-        .timer-box {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            color: #FFD700;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            backdrop-filter: blur(5px);
-        }
-
-        /* --- 4. Main Flashcard Content --- */
+        /* --- Main Content --- */
         .main-content {
             flex: 1;
             display: flex;
@@ -85,135 +55,95 @@
             padding: 40px 20px;
         }
 
-        .flashcard {
-            width: 100%;
-            max-width: 380px;
-            height: 500px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-
-        .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-        }
-
-        .flashcard.flipped .card-inner { transform: rotateY(180deg); }
-
-        .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-            background: white;
-            border: 1px solid #eee;
-        }
-
-        .card-back {
-            transform: rotateY(180deg);
-            border: 4px solid #FFD700;
-        }
-
-        .emoji { font-size: 4.5rem; margin-bottom: 10px; }
-        .word-text { font-size: 3.5rem; font-weight: 800; color: #447F98; text-align: center; }
-        .romaji-text { font-size: 1.4rem; color: #888; font-weight: 600; margin-bottom: 25px; }
-
-        .meaning-label { 
-            font-size: 0.7rem; 
-            font-weight: 900; 
-            color: #FFD700; 
-            background: #222; 
-            padding: 4px 12px; 
-            border-radius: 5px; 
-            margin-bottom: 8px; 
-            letter-spacing: 1px;
-        }
-
-        .meaning-content { font-size: 1.5rem; font-weight: 700; color: #333; text-align: center; margin-bottom: 20px; }
-        .example-content { font-size: 1.1rem; color: #555; text-align: center; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.5; font-weight: 600; }
-
-        .btn-speak {
-            background: #447F98;
+        .page-title {
             color: white;
-            border: none;
-            padding: 14px 30px;
+            font-family: 'swi', sans-serif;
+            font-size: 3rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .timer-box {
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFD700;
+            padding: 10px 25px;
             border-radius: 50px;
             font-weight: bold;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(68, 127, 152, 0.2);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
-        .btn-speak:hover { transform: scale(1.05); background: #2980b9; }
-
-        .back-link {
-            display: block;
-            margin-top: 30px;
-            color: #447F98;
-            text-decoration: none;
-            font-weight: 800;
+        /* --- Flashcard --- */
+        .flashcard { width: 100%; max-width: 380px; height: 480px; perspective: 1000px; cursor: pointer; }
+        .card-inner {
+            position: relative; width: 100%; height: 100%;
+            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
         }
+        .flashcard.flipped .card-inner { transform: rotateY(180deg); }
+        .card-front, .card-back {
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 30px;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .card-front { background: #ffffff; }
+        .card-back { background: #FFD700; color: #222; transform: rotateY(180deg); }
 
-        footer { text-align: center; padding: 25px; color: #999; background: #fff; border-top: 1px solid #eee; margin-top: auto; }
+        .emoji { font-size: 4.5rem; margin-bottom: 15px; }
+        .word-text { font-size: 3.5rem; font-weight: 800; color: #447F98; font-family: 'jes', sans-serif; text-align: center;}
+        .type-tag { background: #eef5f8; color: #447F98; padding: 4px 12px; border-radius: 10px; font-size: 1rem; font-weight: bold; margin-top: 10px; }
+        .meaning-content { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 25px; }
+        .example-content { font-style: italic; font-size: 1.1rem; color: #444; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; font-family: 'note', cursive; }
+
+        .btn-speak { background: #447F98; color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 25px; }
+        .back-link { display: inline-block; margin: 30px 0; color: white; text-decoration: none; font-weight: bold; }
+
+        footer { text-align: center; padding: 25px; color: white; background: #629BB5; width: 100%; font-family: Courier, monospace; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">
-            <img src="speakify.jpg" alt="Logo">
-            <span>SPEAKIFY</span>
-        </div>
+        <div class="logo"><img src="speakify.png" alt="Logo"><span>SPEAKIFY</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="language.html">Language</a></li>
-            <li><a href="japanese-menu.html">Japanese Menu</a></li>
+            <li><a href="japanese-menu.html" class="active">Japanese Menu</a></li>
         </ul>
     </nav>
 
-    <header class="video-header">
-        <h1>今日の単語</h1>
-        <div class="timer-box">NEXT JAPANESE WORD IN: <span id="timer">00:00:00</span></div>
-    </header>
-
     <main class="main-content">
+        <h1 class="page-title">今日の単語</h1>
+        <div class="timer-box">NEXT WORD IN: <span id="timer">00:00:00</span></div>
+
         <div class="flashcard" onclick="this.classList.toggle('flipped')">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="emoji" id="word-emoji">🇯🇵</div>
-                    <div class="word-text" id="word-text">...</div>
-                    <div class="romaji-text" id="word-romaji">...</div>
+                    <div class="word-text" id="word-text">Loading...</div>
+                    <div class="type-tag" id="word-romaji">Romaji</div>
                     <button class="btn-speak" onclick="event.stopPropagation(); speak('word')">Listen 🔊</button>
-                    <p style="margin-top: 30px; font-size: 0.8rem; color: #bbb; font-weight: bold; letter-spacing: 1px;">TAP TO FLIP</p>
+                    <p style="margin-top: 30px; font-size: 0.75rem; color: #bbb; font-weight: bold;">TAP TO REVEAL</p>
                 </div>
                 <div class="card-back">
-                    <p class="meaning-label">MEANING</p>
+                    <p style="font-size: 0.7rem; font-weight: 800; opacity: 0.6; letter-spacing: 1px;">MEANING</p>
                     <p class="meaning-content" id="word-meaning"></p>
-                    <p class="meaning-label">EXAMPLE SENTENCE</p>
+                    <p style="font-size: 0.7rem; font-weight: 800; opacity: 0.6; letter-spacing: 1px;">EXAMPLE</p>
                     <p class="example-content" id="word-example"></p>
                     <button class="btn-speak" style="background: #222;" onclick="event.stopPropagation(); speak('sentence')">Listen Sentence 🔊</button>
                 </div>
             </div>
         </div>
 
-        <a href="japanese-menu.html" class="back-link">← Back to Japanese Menu</a>
+        <a href="japanese-menu.html" class="back-link">← Return to Japanese Menu</a>
     </main>
 
     <footer>&copy; 2026 SPEAKIFY</footer>
 
     <script>
-        // FULL 100 WORD LIST RESTORED
         const japaneseData = [
             { w: "ドキドキ", r: "Doki Doki", m: "Heart-pounding with excitement.", e: "好きな人に会って、胸がドキドキします。", em: "💓" },
             { w: "ワクワク", r: "Waku Waku", m: "Excited and can't wait!", e: "明日の旅行がワクワクします！", em: "🤩" },
@@ -320,7 +250,7 @@
         let currentWord = "";
         let currentSentence = "";
 
-        function updateContent() {
+        function updateWord() {
             const now = new Date();
             const start = new Date(now.getFullYear(), 0, 0);
             const diff = now - start;
@@ -333,10 +263,22 @@
             document.getElementById('word-text').innerText = today.w;
             document.getElementById('word-romaji').innerText = today.r;
             document.getElementById('word-meaning').innerText = today.m;
-            document.getElementById('word-example').innerText = today.e;
+            document.getElementById('word-example').innerText = `"${today.e}"`;
             
             currentWord = today.w;
             currentSentence = today.e;
+        }
+
+        function updateTimer() {
+            const now = new Date();
+            const tomorrow = new Date();
+            tomorrow.setDate(now.getDate() + 1);
+            tomorrow.setHours(0, 0, 0, 0);
+            const diff = tomorrow - now;
+            const h = Math.floor(diff / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('timer').innerText = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
         }
 
         function speak(type) {
@@ -348,24 +290,10 @@
             window.speechSynthesis.speak(msg);
         }
 
-        function updateTimer() {
-            const now = new Date();
-            const tomorrow = new Date();
-            tomorrow.setDate(now.getDate() + 1);
-            tomorrow.setHours(0, 0, 0, 0);
-            
-            const diff = tomorrow - now;
-            const h = Math.floor(diff / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((diff % (1000 * 60)) / 1000);
-            
-            document.getElementById('timer').innerText = 
-                `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-        }
-
         setInterval(updateTimer, 1000);
-        updateContent();
+        updateWord();
         updateTimer();
     </script>
 </body>
 </html>
+
