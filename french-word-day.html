@@ -4,89 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | French Word of the Day</title>
+    <link rel="stylesheet" href="style5.css">
     <style>
-        /* --- Global Styles --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
+        /* --- Quick Fix for English Matching Design --- */
         body {
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            background-color: #447F98;
-            width: 100%;
-            overflow-x: hidden;
+            background-color: #f4f7f6; /* Lighter background like English pages */
         }
 
-        /* --- Navbar --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            height: 80px;
-            background: #ffffff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: #447F98;
-        }
-
-        .logo img { height: 45px; }
-
-        .nav-links { list-style: none; display: flex; gap: 25px; }
-        .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
-        .nav-links a:hover { color: #447F98; }
-
-        /* --- Main Content --- */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-        }
-
-        .page-title {
+        .video-header {
+            padding: 60px 20px !important; 
+            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
+            text-align: center;
             color: white;
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .timer-box {
-            background: rgba(0,0,0,0.25);
+        .video-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        /* Matches the Timer to a Pill Box style */
+        .timer-pill {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
             color: #FFD700;
-            padding: 10px 25px;
+            padding: 8px 25px;
             border-radius: 50px;
             font-weight: bold;
-            margin-bottom: 30px;
             font-size: 0.85rem;
-            border: 1px solid rgba(255, 215, 0, 0.4);
+            margin-top: 15px;
             letter-spacing: 1px;
         }
 
-        /* --- Flashcard --- */
+        /* --- Flashcard Styling --- */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px !important;
+        }
+
         .flashcard {
             width: 100%;
             max-width: 380px;
             height: 480px;
             perspective: 1000px;
             cursor: pointer;
+            margin-bottom: 20px;
         }
 
         .card-inner {
@@ -110,10 +78,10 @@
             align-items: center;
             justify-content: center;
             padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
         }
 
-        .card-front { background: #ffffff; }
+        .card-front { background: #ffffff; border: 1px solid #eee; }
         .card-back { background: #FFD700; color: #222; transform: rotateY(180deg); }
 
         .emoji { font-size: 4.5rem; margin-bottom: 15px; }
@@ -121,8 +89,8 @@
         .type-tag { background: #eef5f8; color: #447F98; padding: 4px 12px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
         
         .meaning-label { font-weight: 800; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 12px; opacity: 0.6; }
-        .meaning-content { font-size: 1.25rem; font-weight: 700; text-align: center; line-height: 1.4; margin-bottom: 25px; }
-        .example-content { font-style: italic; font-size: 1.1rem; color: #222; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; line-height: 1.5; font-weight: 600; }
+        .meaning-content { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 25px; }
+        .example-content { font-style: italic; font-size: 1.1rem; color: #222; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; font-weight: 600; }
 
         .btn-speak {
             background: #447F98;
@@ -133,16 +101,18 @@
             font-weight: bold;
             cursor: pointer;
             margin-top: 25px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             transition: 0.3s;
         }
-        .btn-speak:hover { transform: scale(1.05); }
 
-        .back-link { display: inline-block; margin-top: 30px; color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem; }
+        .btn-speak:hover { transform: scale(1.05); background: #2980b9; }
 
-        footer { text-align: center; padding: 25px; color: white; background: rgba(0,0,0,0.1); width: 100%; font-family: monospace; }
+        .back-link { 
+            color: #447F98; 
+            text-decoration: none; 
+            font-weight: bold; 
+            margin-top: 20px; 
+            margin-bottom: 40px;
+        }
     </style>
 </head>
 <body>
@@ -155,14 +125,17 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="language.html">Language</a></li>
-            <li><a href="about.html">About Us</a></li>
+            <li><a href="french-menu.html" class="active">French Menu</a></li>
         </ul>
     </nav>
 
-    <main class="main-content">
-        <h1 class="page-title">Mot du Jour</h1>
-        <div class="timer-box">NEXT FRENCH WORD IN: <span id="timer">00:00:00</span></div>
+    <header class="video-header">
+        <h1>MOT DU JOUR</h1>
+        <p>Your daily French vocabulary booster! 🇫🇷</p>
+        <div class="timer-pill">NEXT WORD IN: <span id="timer">00:00:00</span></div>
+    </header>
 
+    <main class="main-content">
         <div class="flashcard" onclick="this.classList.toggle('flipped')">
             <div class="card-inner">
                 <div class="card-front">
@@ -170,14 +143,14 @@
                     <div class="word-text" id="word-text">Chargement...</div>
                     <div class="type-tag" id="word-type">French</div>
                     <button class="btn-speak" onclick="event.stopPropagation(); speakWord()">Listen 🔊</button>
-                    <p style="margin-top: 30px; font-size: 0.75rem; color: #bbb; font-weight: bold;">TAP FOR ENGLISH MEANING</p>
+                    <p style="margin-top: 30px; font-size: 0.7rem; color: #bbb; font-weight: bold;">TAP TO FLIP</p>
                 </div>
                 <div class="card-back">
                     <p class="meaning-label">ENGLISH MEANING</p>
                     <p class="meaning-content" id="word-meaning"></p>
-                    <p class="meaning-label" style="margin-top:10px;">FRENCH EXAMPLE</p>
+                    <p class="meaning-label">FRENCH EXAMPLE</p>
                     <p class="example-content" id="word-example"></p>
-                    <button class="btn-speak" style="background: #222; margin-top:15px; padding: 8px 20px; font-size: 0.8rem;" onclick="event.stopPropagation(); speakSentence()">Listen Sentence 🔊</button>
+                    <button class="btn-speak" style="background: #222;" onclick="event.stopPropagation(); speakSentence()">Hear Sentence 🔊</button>
                 </div>
             </div>
         </div>
@@ -188,6 +161,7 @@
     <footer>&copy; 2026 SPEAKIFY | FRENCH EDITION</footer>
 
     <script>
+        // ... (Keep your existing frenchData array and JavaScript logic here) ...
         const frenchData = [
             { w: "Épanouir", t: "Verb", m: "To flourish or reach full happiness.", e: "Elle s'est épanouie dans son nouveau travail.", em: "🌸" },
             { w: "Éphémère", t: "Adjective", m: "Lasting for a very short time.", e: "La beauté des fleurs est souvent éphémère.", em: "🦋" },
