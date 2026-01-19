@@ -4,7 +4,176 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | Verbs & Adjectives</title>
-    <link rel="stylesheet" href="style5.css">
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* --- 1. Global Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 2. Navbar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 80px;
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #447F98;
+        }
+
+        .logo img { height: 45px; }
+
+        .nav-links { list-style: none; display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: #447F98; }
+
+        /* --- 3. Header (Blue Gradient) --- */
+        .video-header {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .video-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* --- 4. Tabs & Layout --- */
+        .main-content {
+            flex: 1;
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: none;
+            background: #e0e0e0;
+            color: #555;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #447F98;
+            color: white;
+            box-shadow: 0 4px 15px rgba(68, 127, 152, 0.3);
+        }
+
+        /* --- 5. Grid & Cards --- */
+        .char-section { display: none; }
+        .char-section.active { display: block; }
+
+        .greetings-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .greeting-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+        }
+
+        .greeting-card:hover {
+            transform: translateY(-5px);
+            border-color: #447F98;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .emoji-box {
+            font-size: 2rem;
+            background: #eef5f8;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+        }
+
+        .card-content h3 {
+            color: #447F98;
+            font-size: 1.2rem;
+            margin-bottom: 2px;
+        }
+
+        .romaji-text {
+            color: #888;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .en-text {
+            color: #2c3e50;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            color: #447F98;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,13 +185,13 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="language.html">Language</a></li>
-            <li><a href="japanese-menu.html" class="active">Japanese Menu</a></li>
+            <li><a href="japanese-menu.html">Japanese Menu</a></li>
         </ul>
     </nav>
 
     <header class="video-header">
         <h1>VERBS & ADJECTIVES</h1>
-        <p>Master daily actions and descriptions! ⚡</p>
+        <p>Master daily actions and descriptions!⚡</p>
     </header>
 
     <main class="main-content">
@@ -121,5 +290,5 @@
         });
     </script>
 </body>
-
 </html>
+
