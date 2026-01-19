@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | Japanese Lessons</title>
+    <link rel="stylesheet" href="style2.css"> 
+    
     <style>
-        /* --- 1. Global Styles & Reset --- */
+        /* --- Global Reset --- */
         * {
             margin: 0;
             padding: 0;
@@ -14,15 +16,13 @@
         }
 
         body {
+            background-color: #f4f7f6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            background-color: #447F98; /* Tema Teal Anda */
-            width: 100%;
-            overflow-x: hidden;
         }
 
-        /* --- 2. Navbar --- */
+        /* --- Navbar (Matches English/French) --- */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -47,124 +47,105 @@
 
         .logo img { height: 45px; }
 
-        .nav-links { 
-            list-style: none; 
-            display: flex; 
-            gap: 25px; 
-        }
-
-        .nav-links a { 
-            text-decoration: none; 
-            color: #333; 
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
+        .nav-links { list-style: none; display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
         .nav-links a:hover { color: #447F98; }
 
-        /* --- 3. Main Content (Center Magic) --- */
+        /* --- Header (Matches the Blue Gradient Design) --- */
+        .video-header {
+            padding: 80px 20px !important; 
+            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* --- Menu Container --- */
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;    /* Luruskan secara horizontal */
-            justify-content: center; /* Letakkan di tengah skrin secara vertical */
-            padding: 40px 20px;
-            width: 100%;
+            align-items: center;
+            padding: 50px 20px;
         }
 
         .selection-container {
             width: 100%;
-            max-width: 500px; /* Lebar kotak yang paling kemas */
+            max-width: 500px;
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            text-align: center;
+            gap: 18px;
         }
 
-        .page-title {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 30px;
-            font-weight: 800;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        /* --- 4. Language Cards (Pill Style) --- */
+        /* --- Pill-Style Link Cards --- */
         .lang-card {
             display: flex;
             align-items: center;
-            padding: 18px 25px;
-            background: #f8f9fa;
-            border-radius: 50px; 
+            padding: 15px 25px;
+            background: #ffffff;
+            border-radius: 50px; /* Makes it a pill */
             text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border: 1px solid #eee;
         }
 
         .lang-card:hover {
-            transform: translateY(-5px);
-            background: #ffffff;
-            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-color: #447F98;
         }
 
         .lang-icon-circle {
             width: 45px;
             height: 45px;
-            background: #447F98;
-            color: white;
+            background: #eef5f8;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 1.2rem;
             margin-right: 20px;
-            flex-shrink: 0; /* Supaya icon tak penyet */
         }
 
         .lang-label {
             flex-grow: 1;
             color: #2c3e50;
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             font-weight: 700;
-            text-align: left;
         }
 
         .arrow-square {
-            width: 35px;
-            height: 35px;
-            background: #447F98;
-            color: white;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            color: #447F98;
             font-weight: bold;
+            font-size: 1.2rem;
         }
 
-        /* --- 5. Footer & Back Link --- */
+        /* --- Back Link & Footer --- */
         .back-link {
             display: inline-block;
             margin-top: 30px;
-            color: white;
+            color: #447F98;
             text-decoration: none;
             font-weight: bold;
-            opacity: 0.8;
-            transition: 0.3s;
-        }
-
-        .back-link:hover {
-            opacity: 1;
-            text-decoration: underline;
         }
 
         footer {
             text-align: center;
             padding: 25px;
-            color: white;
-            background: rgba(0,0,0,0.1);
+            color: #666;
+            background: #fff;
+            border-top: 1px solid #eee;
             width: 100%;
-            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -182,13 +163,17 @@
         </ul>
     </nav>
 
+    <header class="video-header">
+        <h1>JAPANESE MENU</h1>
+        <p>Explore the beauty of the Japanese language 🇯🇵</p>
+    </header>
+
     <main class="main-content">
         <div class="selection-container">
-            <h1 class="page-title">Japanese Menu</h1>
             
             <a href="jp-alphabet.html" class="lang-card">
                 <div class="lang-icon-circle">🔤</div>
-                <span class="lang-label">Alphabet</span>
+                <span class="lang-label">Alphabet (Hiragana/Katakana)</span>
                 <div class="arrow-square">→</div>
             </a>
 
@@ -206,20 +191,23 @@
 
             <a href="jp-videos.html" class="lang-card">
                 <div class="lang-icon-circle">📺</div>
-                <span class="lang-label">Watch Videos</span>
+                <span class="lang-label">Watch Lessons</span>
                 <div class="arrow-square">→</div>
             </a>
 
-          <a href="japanese-word-day.html" class="lang-card">
-             <div class="lang-icon-circle">📅</div>
-             <span class="lang-label">Word of the Day</span>
-             <div class="arrow-square">→</div>
+            <a href="japanese-word-day.html" class="lang-card">
+                <div class="lang-icon-circle">📅</div>
+                <span class="lang-label">Word of the Day</span>
+                <div class="arrow-square">→</div>
             </a>
             
-            <a href="language.html" class="back-link">← Back to Languages</a>
+            <center>
+                <a href="language.html" class="back-link">← Back to Languages</a>
+            </center>
         </div>
     </main>
 
     <footer>&copy; 2026 SPEAKIFY</footer>
+
 </body>
 </html>
