@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Sign up</title>
+    <link rel="stylesheet" href="style2.css">
+ <link href="5.gif" rel="icon">
+
+</head>
+<body>
+
+<div class="content-box" style="max-width: 400px; margin: 100px auto;">
+  <h2 style="text-align:center;">Sign up</h2>
+
+  <form onsubmit="return dummyLogin()">
+    <input type="text" id="username" placeholder="Username" ><br><br>
+    <input type="password" id="password" placeholder="Password"><br><br>
+
+    <button type="submit" class="btn-signup" style="width:100%;">Sign Up</button>
+  </form>
+
+  <p id="msg" style="text-align:center; margin-top:15px;"></p>
+</div>
+
+<script>
+function dummyLogin() {
+  document.getElementById("msg").innerHTML = "successful!";
+  setTimeout(() => {
+    window.location.href = "index.html"; // redirect
+  }, 1500);
+  return false;
+}
+</script>
+
+</body>
+</html>
