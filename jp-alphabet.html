@@ -3,8 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speakify | All Alphabets</title>
-    <link rel="stylesheet" href="style5.css">
+    <title>Speakify | Japanese Alphabets</title>
+    <link rel="stylesheet" href="style2.css">
+    <style>
+        /* --- 1. Global Reset --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f7f6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- 2. Navbar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            height: 80px;
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #447F98;
+        }
+
+        .logo img { height: 45px; }
+
+        .nav-links { list-style: none; display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover { color: #447F98; }
+
+        /* --- 3. Header --- */
+        .video-header {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .video-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        /* --- 4. Tabs --- */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: none;
+            background: #e0e0e0;
+            color: #555;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #447F98;
+            color: white;
+            box-shadow: 0 4px 15px rgba(68, 127, 152, 0.3);
+        }
+
+        /* --- 5. Alphabet Grid --- */
+        .alphabet-wrapper {
+            flex: 1;
+            padding: 0 5% 50px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .char-section { display: none; }
+        .char-section.active { display: block; }
+
+        .char-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
+        }
+
+        .alphabet-card {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        .alphabet-card:hover {
+            transform: translateY(-5px);
+            border-color: #447F98;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-circle {
+            font-size: 2rem;
+            color: #447F98;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .card-info p {
+            color: #888;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .audio-btn {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            opacity: 0.5;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 40px;
+            color: #447F98;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
 
@@ -16,13 +172,13 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="language.html">Language</a></li>
-            <li><a href="japanese-menu.html" class="active">Japanese Menu</a></li>
+            <li><a href="japanese-menu.html">Japanese Menu</a></li>
         </ul>
     </nav>
 
     <header class="video-header">
         <h1>JAPANESE ALPHABET</h1>
-        <p>Master all 46 Hiragana and Katakana characters! 🇯🇵</p>
+        <p>Click a character to hear the pronunciation! 🇯🇵</p>
     </header>
 
     <main class="alphabet-wrapper">
@@ -39,13 +195,12 @@
             <div class="char-grid" id="katakana-grid"></div>
         </section>
 
-        <a href="japanese-menu.html" class="back-link">← Back to Menu</a>
+        <a href="japanese-menu.html" class="back-link">← Back to Japanese Menu</a>
     </main>
 
     <footer>&copy; 2026 SPEAKIFY</footer>
 
     <script>
-        // FULL LIST OF 46 CHARACTERS
         const hiraData = [
             ['あ','a'],['い','i'],['う','u'],['え','e'],['お','o'],
             ['か','ka'],['き','ki'],['く','ku'],['け','ke'],['こ','ko'],
@@ -80,7 +235,6 @@
                 card.innerHTML = `
                     <div class="card-circle">${char}</div>
                     <div class="card-info">
-                        <h3>${char}</h3>
                         <p>${romaji.toUpperCase()}</p>
                     </div>
                     <div class="audio-btn">🔊</div>
@@ -94,7 +248,6 @@
             window.speechSynthesis.cancel();
             const uttr = new SpeechSynthesisUtterance(text);
             uttr.lang = 'ja-JP';
-            uttr.volume = 1.0; // LOUD
             uttr.rate = 0.8;
             window.speechSynthesis.speak(uttr);
         }
@@ -112,5 +265,6 @@
     </script>
 </body>
 </html>
+
 
 
