@@ -125,34 +125,34 @@
 
     <script>
         // Data A to Z: French Word + English Translation
-        const data = [
-            { l: 'A', e: '✈️', w: 'Avion', p: 'Ah', t: 'Airplane' },
-            { l: 'B', e: '🍌', w: 'Banane', p: 'Bay', t: 'Banana' },
-            { l: 'C', e: '🐱', w: 'Chat', p: 'Say', t: 'Cat' },
-            { l: 'D', e: '🐬', w: 'Dauphin', p: 'Day', t: 'Dolphin' },
-            { l: 'E', e: '🐘', w: 'Éléphant', p: 'Uh', t: 'Elephant' },
-            { l: 'F', e: '🍓', w: 'Fraise', p: 'Ef', t: 'Strawberry' },
-            { l: 'G', e: '🦒', w: 'Girafe', p: 'Zhay', t: 'Giraffe' },
-            { l: 'H', e: '🚁', w: 'Hélico', p: 'Ash', t: 'Helicopter' },
-            { l: 'I', e: '🍦', w: 'Ile', p: 'Ee', t: 'Island' },
-            { l: 'J', e: '🕹️', w: 'Jeu', p: 'Zhee', t: 'Game' },
-            { l: 'K', e: '🥝', w: 'Kiwi', p: 'Kah', t: 'Kiwi' },
-            { l: 'L', e: '🦁', w: 'Lion', p: 'El', t: 'Lion' },
-            { l: 'M', e: '🐒', w: 'Maman', p: 'Em', t: 'Mom' },
-            { l: 'N', e: '☁️', w: 'Nuage', p: 'En', t: 'Cloud' },
-            { l: 'O', e: '🍊', w: 'Orange', p: 'Oh', t: 'Orange' },
-            { l: 'P', e: '🍎', w: 'Pomme', p: 'Pay', t: 'Apple' },
-            { l: 'Q', e: '🧀', w: 'Quiche', p: 'Ku', t: 'Quiche' },
-            { l: 'R', e: '🌈', w: 'Rat', p: 'Air', t: 'Rat' },
-            { l: 'S', e: '☀️', w: 'Soleil', p: 'Es', t: 'Sun' },
-            { l: 'T', e: '🐢', w: 'Tortue', p: 'Tay', t: 'Turtle' },
-            { l: 'U', e: '🦄', w: 'Unicorn', p: 'Uuu', t: 'Unicorn' },
-            { l: 'V', e: '🚲', w: 'Vélo', p: 'Vay', t: 'Bicycle' },
-            { l: 'W', e: '🛶', w: 'Wagon', p: 'Doobla-vay', t: 'Wagon' },
-            { l: 'X', e: '🎻', w: 'Xylo', p: 'Iks', t: 'Xylophone' },
-            { l: 'Y', e: '🧘', w: 'Yoga', p: 'Ee-grek', t: 'Yoga' },
-            { l: 'Z', e: '🦓', w: 'Zèbre', p: 'Zed', t: 'Zebra' }
-        ];
+        const alphabetData = [
+    { l: 'A', e: '🐝', w: 'Abeille', p: 'Ah', t: 'Bee' },
+    { l: 'B', e: '🚢', w: 'Bateau', p: 'Bay', t: 'Boat' },
+    { l: 'C', e: '🎁', w: 'Cadeau', p: 'Say', t: 'Gift' },
+    { l: 'D', e: '🎲', w: 'Dé', p: 'Day', t: 'Dice' },
+    { l: 'E', e: '🌟', w: 'Étoile', p: 'Uh', t: 'Star' },
+    { l: 'F', e: '🔥', w: 'Feu', p: 'Ef', t: 'Fire' },
+    { l: 'G', e: '🦍', w: 'Gorille', p: 'Zhay', t: 'Gorilla' }, // Changed: Identical word
+    { l: 'H', e: '🦉', w: 'Hibou', p: 'Ash', t: 'Owl' },
+    { l: 'I', e: '🐜', w: 'Insecte', p: 'Ee', t: 'Insect' },
+    { l: 'J', e: '🪴', w: 'Jardin', p: 'Zhee', t: 'Garden' },
+    { l: 'K', e: '🐨', w: 'Koala', p: 'Kah', t: 'Koala' },
+    { l: 'L', e: '🌙', w: 'Lune', p: 'El', t: 'Moon' },
+    { l: 'M', e: '🏔️', w: 'Montagne', p: 'Em', t: 'Mountain' },
+    { l: 'N', e: '🏙️', w: 'Nuit', p: 'En', t: 'Night' }, 
+    { l: 'O', e: '🐦', w: 'Oiseau', p: 'Oh', t: 'Bird' },
+    { l: 'P', e: '🥖', w: 'Pain', p: 'Pay', t: 'Bread' },
+    { l: 'Q', e: '📊', w: 'Quota', p: 'Ku', t: 'Quota' }, // Changed: Identical word
+    { l: 'R', e: '👑', w: 'Roi', p: 'Air', t: 'King' },
+    { l: 'S', e: '🐍', w: 'Serpent', p: 'Es', t: 'Snake' },
+    { l: 'T', e: '🐯', w: 'Tigre', p: 'Tay', t: 'Tiger' },
+    { l: 'U', e: '🏭', w: 'Usine', p: 'Uuu', t: 'Factory' },
+    { l: 'V', e: '🌋', w: 'Volcan', p: 'Vay', t: 'Volcano' }, // Changed: Very similar
+    { l: 'W', e: '🌐', w: 'Web', p: 'Doobla-vay', t: 'Web' }, // Changed: Same word
+    { l: 'X', e: '🎷', w: 'Xylophone', p: 'Iks', t: 'Xylophone' },
+    { l: 'Y', e: '👁️', w: 'Yeux', p: 'Ee-grek', t: 'Eyes' },
+    { l: 'Z', e: '🦓', w: 'Zèbre', p: 'Zed', t: 'Zebra' } // Changed: Similar word
+];;
 
         const grid = document.getElementById('alphabetGrid');
 
@@ -181,3 +181,4 @@
 </body>
 
 </html>
+
