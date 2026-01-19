@@ -4,124 +4,114 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | French Word of the Day</title>
-    <link rel="stylesheet" href="style5.css">
+    <link rel="stylesheet" href="style2.css">
+    
     <style>
-        /* --- Quick Fix for English Matching Design --- */
+        /* --- Custom Fonts (Syncing with English Page) --- */
+        @font-face { font-family: 'swi'; src: url(swirly.otf); }
+        @font-face { font-family: 'note'; src: url(Notedry.ttf); }
+        @font-face { font-family: 'jes'; src: url(Jester.ttf); }
+
+        /* --- Global Styles --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background-color: #f4f7f6; /* Lighter background like English pages */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #447F98;
+            background-image: url('6.jpg'); 
+            background-repeat: repeat;
+            overflow-x: hidden;
         }
 
-        .video-header {
-            padding: 60px 20px !important; 
-            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
-            text-align: center;
-            color: white;
+        /* --- Navbar --- */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 5%;
+            height: 80px;
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo { display: flex; align-items: center; font-weight: bold; color: #1e73be; }
+        .logo img { height: 100px; width: auto; object-fit: contain; }
+
+        .nav-links { list-style: none; display: flex; gap: 25px; }
+        .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: #447F98; }
+
+        /* --- Main Content --- */
+        .main-content {
+            flex: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 40px 20px;
         }
 
-        .video-header h1 {
+        .page-title {
+            color: white;
+            font-family: 'swi', sans-serif;
             font-size: 3rem;
-            margin-bottom: 10px;
-            font-weight: 800;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-align: center;
         }
 
-        /* Matches the Timer to a Pill Box style */
-        .timer-pill {
+        .timer-box {
             background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
             color: #FFD700;
-            padding: 8px 25px;
+            padding: 10px 25px;
             border-radius: 50px;
             font-weight: bold;
-            font-size: 0.85rem;
-            margin-top: 15px;
-            letter-spacing: 1px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
-        /* --- Flashcard Styling --- */
-        .main-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 40px !important;
-        }
-
-        .flashcard {
-            width: 100%;
-            max-width: 380px;
-            height: 480px;
-            perspective: 1000px;
-            cursor: pointer;
-            margin-bottom: 20px;
-        }
-
+        /* --- Flashcard --- */
+        .flashcard { width: 100%; max-width: 380px; height: 480px; perspective: 1000px; cursor: pointer; }
         .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
+            position: relative; width: 100%; height: 100%;
             transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
-
         .flashcard.flipped .card-inner { transform: rotateY(180deg); }
-
         .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 30px;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-
-        .card-front { background: #ffffff; border: 1px solid #eee; }
+        .card-front { background: #ffffff; }
         .card-back { background: #FFD700; color: #222; transform: rotateY(180deg); }
 
         .emoji { font-size: 4.5rem; margin-bottom: 15px; }
-        .word-text { font-size: 2.2rem; font-weight: 800; color: #447F98; text-align: center; }
-        .type-tag { background: #eef5f8; color: #447F98; padding: 4px 12px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
+        .word-text { font-size: 2.5rem; font-weight: 800; color: #447F98; font-family: 'jes', sans-serif; text-align: center;}
+        .type-tag { background: #eef5f8; color: #447F98; padding: 4px 12px; border-radius: 10px; font-size: 0.7rem; text-transform: uppercase; margin-top: 10px; }
         
-        .meaning-label { font-weight: 800; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 12px; opacity: 0.6; }
+        .label-text { font-size: 0.7rem; font-weight: 800; opacity: 0.6; letter-spacing: 1px; }
         .meaning-content { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 25px; }
-        .example-content { font-style: italic; font-size: 1.1rem; color: #222; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; font-weight: 600; }
+        .example-content { font-style: italic; font-size: 1.1rem; color: #444; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; font-family: 'note', cursive; }
 
-        .btn-speak {
-            background: #447F98;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 25px;
-            transition: 0.3s;
-        }
+        .btn-speak { background: #447F98; color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 25px; transition: 0.2s; }
+        .btn-speak:hover { transform: scale(1.05); }
+        .back-link { display: inline-block; margin: 30px 0; color: white; text-decoration: none; font-weight: bold; }
 
-        .btn-speak:hover { transform: scale(1.05); background: #2980b9; }
-
-        .back-link { 
-            color: #447F98; 
-            text-decoration: none; 
-            font-weight: bold; 
-            margin-top: 20px; 
-            margin-bottom: 40px;
-        }
+        footer { text-align: center; padding: 25px; color: white; background: #629BB5; width: 100%; font-family: Courier, monospace; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">
-            <img src="speakify.jpg" alt="Logo">
-            <span>SPEAKIFY</span>
-        </div>
+        <div class="logo"><img src="speakify.png" alt="Logo"><span>SPEAKIFY</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="language.html">Language</a></li>
@@ -129,39 +119,35 @@
         </ul>
     </nav>
 
-    <header class="video-header">
-        <h1>MOT DU JOUR</h1>
-        <p>Your daily French vocabulary booster! 🇫🇷</p>
-        <div class="timer-pill">NEXT WORD IN: <span id="timer">00:00:00</span></div>
-    </header>
-
     <main class="main-content">
+        <h1 class="page-title">Mot du Jour</h1>
+        <div class="timer-box">PROCHAIN MOT DANS: <span id="timer">00:00:00</span></div>
+
         <div class="flashcard" onclick="this.classList.toggle('flipped')">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="emoji" id="word-emoji">🇫🇷</div>
                     <div class="word-text" id="word-text">Chargement...</div>
-                    <div class="type-tag" id="word-type">French</div>
-                    <button class="btn-speak" onclick="event.stopPropagation(); speakWord()">Listen 🔊</button>
-                    <p style="margin-top: 30px; font-size: 0.7rem; color: #bbb; font-weight: bold;">TAP TO FLIP</p>
+                    <div class="type-tag" id="word-type">Nom</div>
+                    <button class="btn-speak" onclick="event.stopPropagation(); speak('word')">Listen 🔊</button>
+                    <p style="margin-top: 30px; font-size: 0.75rem; color: #bbb; font-weight: bold;">TAP TO FLIP</p>
                 </div>
                 <div class="card-back">
-                    <p class="meaning-label">ENGLISH MEANING</p>
+                    <p class="label-text">DÉFINITION</p>
                     <p class="meaning-content" id="word-meaning"></p>
-                    <p class="meaning-label">FRENCH EXAMPLE</p>
+                    <p class="label-text">EXEMPLE</p>
                     <p class="example-content" id="word-example"></p>
-                    <button class="btn-speak" style="background: #222;" onclick="event.stopPropagation(); speakSentence()">Hear Sentence 🔊</button>
+                    <button class="btn-speak" style="background: #222;" onclick="event.stopPropagation(); speak('sentence')">Listen Sentence 🔊</button>
                 </div>
             </div>
         </div>
 
-        <a href="french-menu.html" class="back-link">← Retour au Menu</a>
+        <a href="french-menu.html" class="back-link">← Retour au Menu Français</a>
     </main>
 
     <footer>&copy; 2026 SPEAKIFY | FRENCH EDITION</footer>
 
     <script>
-        // ... (Keep your existing frenchData array and JavaScript logic here) ...
         const frenchData = [
             { w: "Épanouir", t: "Verb", m: "To flourish or reach full happiness.", e: "Elle s'est épanouie dans son nouveau travail.", em: "🌸" },
             { w: "Éphémère", t: "Adjective", m: "Lasting for a very short time.", e: "La beauté des fleurs est souvent éphémère.", em: "🦋" },
@@ -182,7 +168,7 @@
             { w: "Meuf", t: "Verlan Slang", m: "Woman / Girl / Girlfriend.", e: "Regarde cette meuf, elle est trop stylée.", em: "👩" },
             { w: "Grave", t: "Adverb", m: "Totally / Seriously.", e: "C'était grave bien hier soir !", em: "🤘" },
             { w: "Santé", t: "Noun", m: "Health / Cheers!", e: "À votre santé ! Buvez avec modération.", em: "🥂" },
-            { w: "Franglo", t: "Noun", m: "A mix of French and English.", e: "Certains jeunes parlent un peu franglais.", em: "🗣️" },
+            { w: "Franglais", t: "Noun", m: "A mix of French and English.", e: "Certains jeunes parlent un peu franglais.", em: "🗣️" },
             { w: "Gourmand", t: "Adjective", m: "Someone who loves good food.", e: "Il est très gourmand, il adore les gâteaux.", em: "🍰" },
             { w: "Liberté", t: "Noun", m: "Freedom.", e: "La liberté est une valeur fondamentale.", em: "🗽" },
             { w: "Égalité", t: "Noun", m: "Equality.", e: "Nous luttons pour l'égalité des droits.", em: "⚖️" },
@@ -207,8 +193,8 @@
             { w: "Danse", t: "Noun", m: "Dance.", e: "Elle prend des cours de danse.", em: "💃" },
             { w: "Voyage", t: "Noun", m: "Travel / Trip.", e: "Bon voyage et amuse-toi bien !", em: "🌍" },
             { w: "Aventure", t: "Noun", m: "Adventure.", e: "L'aventure nous attend !", em: "🤠" },
-            { w: "Sourire", t: "Verb/Noun", m: "To smile / A smile.", e: "Un sourire ne coûte rien.", em: "😊" },
-            { w: "Rire", t: "Verb/Noun", m: "To laugh / Laughter.", e: "Rire est bon pour la santé.", em: "😂" },
+            { w: "Sourire", t: "Verb", m: "To smile / A smile.", e: "Un sourire ne coûte rien.", em: "😊" },
+            { w: "Rire", t: "Verb", m: "To laugh / Laughter.", e: "Rire est bon pour la santé.", em: "😂" },
             { w: "Plaisir", t: "Noun", m: "Pleasure / Delight.", e: "C'est un plaisir de vous voir.", em: "🎁" },
             { w: "Bonheur", t: "Noun", m: "Happiness.", e: "Je vous souhaite tout le bonheur du monde.", em: "🍀" },
             { w: "Paix", t: "Noun", m: "Peace.", e: "Nous voulons vivre en paix.", em: "🕊️" },
@@ -261,11 +247,11 @@
             { w: "Manger", t: "Verb", m: "To eat.", e: "J'adore manger des croissants.", em: "🥐" },
             { w: "Boire", t: "Verb", m: "To drink.", e: "Il faut boire beaucoup d'eau.", em: "🥤" },
             { w: "Dormir", t: "Verb", m: "To sleep.", e: "J'ai besoin de dormir un peu.", em: "💤" },
-            { w: "Français", t: "Noun/Adj", m: "French.", e: "Le français est une belle langue.", em: "🇫🇷" }
+            { w: "Français", t: "Noun", m: "French.", e: "Le français est une belle langue.", em: "🇫🇷" }
         ];
 
-        let currentFrenchWord = "";
-        let currentFrenchSentence = "";
+        let currentWord = "";
+        let currentSentence = "";
 
         function updateContent() {
             const now = new Date();
@@ -278,21 +264,14 @@
             document.getElementById('word-meaning').innerText = today.m;
             document.getElementById('word-example').innerText = `"${today.e}"`;
             
-            currentFrenchWord = today.w;
-            currentFrenchSentence = today.e;
+            currentWord = today.w;
+            currentSentence = today.e;
         }
 
-        function speakWord() {
+        function speak(type) {
             window.speechSynthesis.cancel();
-            const msg = new SpeechSynthesisUtterance(currentFrenchWord);
-            msg.lang = 'fr-FR';
-            msg.rate = 0.8;
-            window.speechSynthesis.speak(msg);
-        }
-
-        function speakSentence() {
-            window.speechSynthesis.cancel();
-            const msg = new SpeechSynthesisUtterance(currentFrenchSentence);
+            const text = (type === 'word') ? currentWord : currentSentence;
+            const msg = new SpeechSynthesisUtterance(text);
             msg.lang = 'fr-FR';
             msg.rate = 0.8;
             window.speechSynthesis.speak(msg);
@@ -316,3 +295,4 @@
     </script>
 </body>
 </html>
+
