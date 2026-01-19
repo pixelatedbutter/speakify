@@ -1,4 +1,3 @@
-
 /* Container bar */
 .sub-nav {
   background-color: #629BB5;
@@ -146,18 +145,25 @@ display: flex;
 }
 
 .course-card {
+  display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  width: 30%;
-  padding: 25px 20px;
+
+  width: 70%;              /* slightly wider */
+  min-height: 50px;       /* taller */
+  padding: 25px 25px;      /* more space inside */
+
+  font-size: 20px;         /* text scales nicely */
+  font-weight: 500;
+
   background: rgba(255, 255, 255, 0.85);
-  border-radius: 18px;
+  border-radius: 22px;     /* smoother corners */
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.4);              
-  align-items: center;        
-  }
+  border: 1px solid rgba(255,255,255,0.4);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 
 .course-card:hover {
   transform: translateY(-8px);
@@ -266,5 +272,73 @@ display: flex;
   margin-right: 0;
 }
 
-#backToTop { display: none; position: fixed; bottom: 100px; right: 30px; background: #ffd600; color: #333; border: none; width: 50px; height: 50px; border-radius: 50%; font-size: 20px; cursor: pointer; z-index: 2500; }
-.floating-mute { position: fixed; bottom: 30px; right: 30px; width: 50px; height: 50px; border-radius: 50%; background: #ffd600; border: none; cursor: pointer; z-index: 2500; font-size: 20px; }
+
+.dropdown {
+  position: relative;
+  width: 32%;   /* same as course-card */
+}
+
+/* Hide dropdown */
+.dropdown-content {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  width: 100%;
+
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+/* Show on hover */
+.dropdown:hover .dropdown-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Dropdown links */
+.dropdown-content a {
+  display: block;
+  padding: 14px 18px;
+  color: black;
+  text-decoration: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+
+
+
+.team-container {
+  display: flex;
+  justify-content: space-around; /* straight line */
+  align-items: center;
+  margin-top: 40px;
+}
+
+.team-member {
+  text-align: center;
+}
+
+.team-member img {
+  width: 120px;        /* icon size */
+  height: 120px;
+  border-radius: 50%;  /* circle icons (optional) */
+  object-fit: cover;
+  margin-bottom: 12px;
+}
+
+.team-member p {
+  font-size: 18px;
+  font-weight: 500;
+}
