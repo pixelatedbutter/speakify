@@ -352,8 +352,8 @@ display: flex;
 }
 
 .social-icons img {
-  width: 20px;     /* small icons */
-  height: 20px;
+  width: 30px;     /* small icons */
+  height: 30px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -409,4 +409,5 @@ display: flex;
   transform: translateY(-4px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
+
 
