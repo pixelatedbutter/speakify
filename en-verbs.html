@@ -2,11 +2,86 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
     <title>Speakify | English Verbs & Adjectives</title>
     <link rel="stylesheet" href="style5.css">
     <link rel="stylesheet" href="style2.css">
     <link href="5.gif" rel="icon">
+
+    <style>
+        /* FIX 1: Add specific styles for the Tab Buttons to make them look like pills */
+        .tabs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            position: relative;
+            z-index: 10; /* Ensure buttons are on top */
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 2px solid #ffffff;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .tab-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .tab-btn.active {
+            background: #ffffff;
+            color: #447F98;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* FIX 2: Ensure the main content doesn't get pushed under the header */
+        .main-content {
+            position: relative;
+            z-index: 5;
+            padding-top: 20px;
+        }
+
+        /* Styling for the cards to match your screenshot */
+        .greetings-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .greeting-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+            cursor: pointer; /* Makes it obvious it can be touched */
+            border: 1px solid #eee;
+        }
+
+        .greeting-card:active {
+            transform: scale(0.95); /* Visual feedback when touched */
+        }
+
+        .char-section {
+            display: none;
+        }
+
+        .char-section.active {
+            display: block;
+        }
+    </style>
 </head>
 <body>
 
@@ -41,12 +116,15 @@
             <div class="greetings-container" id="adj-grid"></div>
         </section>
 
-        <a href="english-menu.html" class="back-link">← Back to Menu</a>
+        <div style="text-align: center;">
+            <a href="english-menu.html" class="back-link">← Back to Menu</a>
+        </div>
     </main>
 
     <footer>&copy; 2026 SPEAKIFY</footer>
 
     <script>
+        // Data remains the same...
         const verbsData = [
             { en: "Eat", pr: "Eet", de: "To consume food", emo: "🍱" },
             { en: "Drink", pr: "Drink", de: "To consume liquid", emo: "🥤" },
@@ -89,10 +167,10 @@
                 const card = document.createElement('div');
                 card.className = 'greeting-card';
                 card.innerHTML = `
-                    <div class="emoji-box">${item.emo}</div>
+                    <div class="emoji-box" style="font-size: 2rem;">${item.emo}</div>
                     <div class="card-content">
-                        <h3 class="jp-text">${item.en}</h3>
-                        <p class="romaji-text">${item.pr}</p>
+                        <h3 class="jp-text" style="margin: 10px 0 5px 0;">${item.en}</h3>
+                        <p class="romaji-text" style="color: #447F98;">${item.pr}</p>
                         <p class="en-text" style="font-size: 0.8rem; color: #666;">${item.de}</p>
                     </div>
                 `;
@@ -104,7 +182,7 @@
         function speak(text) {
             window.speechSynthesis.cancel();
             const uttr = new SpeechSynthesisUtterance(text);
-            uttr.lang = 'en-US'; // English Accent
+            uttr.lang = 'en-US';
             uttr.rate = 0.9;
             window.speechSynthesis.speak(uttr);
         }
@@ -123,8 +201,8 @@
         });
     </script>
 </body>
-
 </html>
+
 
 
 
