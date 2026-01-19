@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Speakify | English Lessons</title>
+    <link rel="stylesheet" href="style2.css">
+    <link href="5.gif" rel="icon">
     <style>
         /* --- 1. Global Styles & Reset --- */
         * {
@@ -17,65 +19,26 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            background-color: #447F98; /* Tema Teal Speakify */
+            background-color: #447F98; /* Speakify Teal Theme */
             width: 100%;
             overflow-x: hidden;
         }
 
-        /* --- 2. Navbar --- */
-        .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-            height: 80px;
-            background: #ffffff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: #447F98;
-        }
-
-        .logo img { height: 45px; }
-
-        .nav-links { 
-            list-style: none; 
-            display: flex; 
-            gap: 25px; 
-        }
-
-        .nav-links a { 
-            text-decoration: none; 
-            color: #333; 
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover { color: #447F98; }
 
         /* --- 3. Main Content (The Centering Magic) --- */
         .main-content {
             flex: 1;
             display: flex;
             flex-direction: column;
-            align-items: center;    /* Luruskan secara horizontal */
-            justify-content: center; /* Luruskan secara vertical */
+            align-items: center;    /* Center Horizontal */
+            justify-content: center; /* Center Vertical */
             padding: 40px 20px;
             width: 100%;
         }
 
         .selection-container {
             width: 100%;
-            max-width: 500px; /* Lebar optimum supaya nampak kemas */
+            max-width: 500px; /* Lebar optimum */
             display: flex;
             flex-direction: column;
             gap: 20px;
@@ -90,7 +53,7 @@
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
-        /* --- 4. Language Cards (Pill Style) --- */
+        /* --- 4. Language Cards (Straight & Pill Style) --- */
         .lang-card {
             display: flex;
             align-items: center;
@@ -127,7 +90,7 @@
             color: #2c3e50;
             font-size: 1.3rem;
             font-weight: 700;
-            text-align: left; /* Teks bahasa di kiri */
+            text-align: left;
         }
 
         .arrow-square {
@@ -172,7 +135,7 @@
 
     <nav class="navbar">
         <div class="logo">
-            <img src="speakify.jpg" alt="Logo">
+            <img src="speakify.png" alt="Logo">
             <span>SPEAKIFY</span>
         </div>
         <ul class="nav-links">
@@ -210,12 +173,11 @@
                 <div class="arrow-square">→</div>
             </a>
 
-       <a href="english-word-day.html" class="lang-card">
-    <div class="lang-icon-circle">📅</div>
-    <span class="lang-label">Word of the Day</span>
-    <div class="arrow-square">→</div>
-</a>
-
+             <a href="english-word-day.html" class="lang-card">
+                <div class="lang-icon-circle">📅</div>
+                <span class="lang-label">Word of the Day</span>
+                <div class="arrow-square">→</div>
+            </a>
             
             <a href="language.html" class="back-link">← Back to Languages</a>
         </div>
