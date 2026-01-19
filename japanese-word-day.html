@@ -5,24 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | Japanese Word of the Day</title>
     <style>
-        /* --- Global Styles --- */
+        /* --- 1. Global Reset & Theme --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', 'Meiryo', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         body {
+            background-color: #f4f7f6;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
-            min-height: 100vh;
-            background-color: #447F98;
-            width: 100%;
             overflow-x: hidden;
         }
 
-        /* --- Navbar --- */
+        /* --- 2. Navbar (Consistent with English/French) --- */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -51,7 +50,33 @@
         .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
         .nav-links a:hover { color: #447F98; }
 
-        /* --- Main Content --- */
+        /* --- 3. Header (Teal Gradient) --- */
+        .video-header {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .video-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        .timer-box {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: #FFD700;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 215, 0, 0.4);
+            backdrop-filter: blur(5px);
+        }
+
+        /* --- 4. Main Flashcard Content --- */
         .main-content {
             flex: 1;
             display: flex;
@@ -60,26 +85,6 @@
             padding: 40px 20px;
         }
 
-        .page-title {
-            color: white;
-            font-size: 2.5rem;
-            margin-bottom: 5px;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-        }
-
-        .timer-box {
-            background: rgba(0,0,0,0.25);
-            color: #FFD700;
-            padding: 10px 25px;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-bottom: 30px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(255, 215, 0, 0.4);
-        }
-
-        /* --- Flashcard --- */
         .flashcard {
             width: 100%;
             max-width: 380px;
@@ -92,7 +97,7 @@
             position: relative;
             width: 100%;
             height: 100%;
-            transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
 
@@ -108,40 +113,59 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            background: white;
+            border: 1px solid #eee;
         }
 
-        .card-front { background: #ffffff; }
-        .card-back { background: #FFD700; color: #222; transform: rotateY(180deg); }
+        .card-back {
+            transform: rotateY(180deg);
+            border: 4px solid #FFD700;
+        }
 
-        .emoji { font-size: 4rem; margin-bottom: 10px; }
-        .word-text { font-size: 3rem; font-weight: 800; color: #447F98; text-align: center; margin-bottom: 5px; }
-        .romaji-text { font-size: 1.2rem; color: #888; font-weight: bold; font-style: italic; }
-        
-        .meaning-label { font-weight: 800; font-size: 0.7rem; letter-spacing: 2px; margin-bottom: 8px; opacity: 0.6; text-transform: uppercase; }
-        .meaning-content { font-size: 1.4rem; font-weight: 700; text-align: center; line-height: 1.3; margin-bottom: 20px; color: #447F98; }
-        .example-content { font-size: 1.1rem; color: #222; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; line-height: 1.6; font-weight: 600; }
+        .emoji { font-size: 4.5rem; margin-bottom: 10px; }
+        .word-text { font-size: 3.5rem; font-weight: 800; color: #447F98; text-align: center; }
+        .romaji-text { font-size: 1.4rem; color: #888; font-weight: 600; margin-bottom: 25px; }
+
+        .meaning-label { 
+            font-size: 0.7rem; 
+            font-weight: 900; 
+            color: #FFD700; 
+            background: #222; 
+            padding: 4px 12px; 
+            border-radius: 5px; 
+            margin-bottom: 8px; 
+            letter-spacing: 1px;
+        }
+
+        .meaning-content { font-size: 1.5rem; font-weight: 700; color: #333; text-align: center; margin-bottom: 20px; }
+        .example-content { font-size: 1.1rem; color: #555; text-align: center; border-top: 1px solid #eee; padding-top: 20px; line-height: 1.5; font-weight: 600; }
 
         .btn-speak {
             background: #447F98;
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 14px 30px;
             border-radius: 50px;
             font-weight: bold;
             cursor: pointer;
             margin-top: 20px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(68, 127, 152, 0.2);
         }
-        .btn-speak:hover { transform: scale(1.05); }
 
-        .back-link { display: inline-block; margin-top: 30px; color: white; text-decoration: none; font-weight: bold; }
+        .btn-speak:hover { transform: scale(1.05); background: #2980b9; }
 
-        footer { text-align: center; padding: 25px; color: white; background: rgba(0,0,0,0.1); width: 100%; font-family: monospace; }
+        .back-link {
+            display: block;
+            margin-top: 30px;
+            color: #447F98;
+            text-decoration: none;
+            font-weight: 800;
+        }
+
+        footer { text-align: center; padding: 25px; color: #999; background: #fff; border-top: 1px solid #eee; margin-top: auto; }
     </style>
 </head>
 <body>
@@ -154,14 +178,16 @@
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
             <li><a href="language.html">Language</a></li>
-            <li><a href="about.html">About Us</a></li>
+            <li><a href="japanese-menu.html">Japanese Menu</a></li>
         </ul>
     </nav>
 
-    <main class="main-content">
-        <h1 class="page-title">今日の単語</h1>
+    <header class="video-header">
+        <h1>今日の単語</h1>
         <div class="timer-box">NEXT JAPANESE WORD IN: <span id="timer">00:00:00</span></div>
+    </header>
 
+    <main class="main-content">
         <div class="flashcard" onclick="this.classList.toggle('flipped')">
             <div class="card-inner">
                 <div class="card-front">
@@ -169,85 +195,77 @@
                     <div class="word-text" id="word-text">...</div>
                     <div class="romaji-text" id="word-romaji">...</div>
                     <button class="btn-speak" onclick="event.stopPropagation(); speak('word')">Listen 🔊</button>
-                    <p style="margin-top: 30px; font-size: 0.75rem; color: #bbb; font-weight: bold;">TAP FOR ENGLISH MEANING</p>
+                    <p style="margin-top: 30px; font-size: 0.8rem; color: #bbb; font-weight: bold; letter-spacing: 1px;">TAP TO FLIP</p>
                 </div>
                 <div class="card-back">
-                    <p class="meaning-label">ENGLISH MEANING</p>
+                    <p class="meaning-label">MEANING</p>
                     <p class="meaning-content" id="word-meaning"></p>
-                    <p class="meaning-label">JAPANESE EXAMPLE</p>
+                    <p class="meaning-label">EXAMPLE SENTENCE</p>
                     <p class="example-content" id="word-example"></p>
-                    <button class="btn-speak" style="background: #222; margin-top:15px;" onclick="event.stopPropagation(); speak('sentence')">Listen Sentence 🔊</button>
+                    <button class="btn-speak" style="background: #222;" onclick="event.stopPropagation(); speak('sentence')">Listen Sentence 🔊</button>
                 </div>
             </div>
         </div>
 
-        <a href="japanese-menu.html" class="back-link">← Back to Menu</a>
+        <a href="japanese-menu.html" class="back-link">← Back to Japanese Menu</a>
     </main>
 
-    <footer>&copy; 2026 SPEAKIFY </footer>
+    <footer>&copy; 2026 SPEAKIFY</footer>
 
     <script>
+        // FULL 100 WORD LIST RESTORED
         const japaneseData = [
-            // --- ONOMATOPOEIA & EMOTIONS ---
-            { w: "ドキドキ", r: "Doki Doki", m: "Heart-pounding with excitement or nerves.", e: "好きな人に会って、胸がドキドキします。", em: "💓" },
+            { w: "ドキドキ", r: "Doki Doki", m: "Heart-pounding with excitement.", e: "好きな人に会って、胸がドキドキします。", em: "💓" },
             { w: "ワクワク", r: "Waku Waku", m: "Excited and can't wait!", e: "明日の旅行がワクワクします！", em: "🤩" },
             { w: "ニコニコ", r: "Niko Niko", m: "Smiling happily.", e: "彼女はいつもニコニコしています。", em: "😊" },
             { w: "ピカピカ", r: "Pika Pika", m: "Shiny or sparkling.", e: "靴がピカピカに光っています。", em: "✨" },
-            { w: "モフモフ", r: "Mofu Mofu", m: "Fluffy and soft (like an animal).", e: "この猫はもふもふしています。", em: "🐱" },
+            { w: "モフモフ", r: "Mofu Mofu", m: "Fluffy and soft.", e: "この猫はもふもふしています。", em: "🐱" },
             { w: "ギリギリ", r: "Giri Giri", m: "Just barely / At the last moment.", e: "電車にギリギリ間に合いました。", em: "🏃‍♂️" },
-            { w: "ペラペラ", r: "Pera Pera", m: "Speaking a language fluently.", e: "彼は日本語がペラペラです。", em: "🗣️" },
-            { w: "ペコペコ", r: "Peko Peko", m: "Very hungry / Starving.", e: "お腹がペコペコです。", em: "😋" },
-            { w: "コロコロ", r: "Koro Koro", m: "Something small and round rolling.", e: "ボールがコロコロ転がっています。", em: "⚽" },
-            { w: "ゴロゴロ", r: "Goro Goro", m: "Thunder sound or lazing around at home.", e: "週末は家でゴロゴロします。", em: "🏠" },
-
-            // --- ANIME & INTERNET SLANG ---
+            { w: "ペラペラ", r: "Pera Pera", m: "Speaking fluently.", e: "彼は日本語がペラペラです。", em: "🗣️" },
+            { w: "ペコペコ", r: "Peko Peko", m: "Very hungry.", e: "お腹がペコペコです。", em: "😋" },
+            { w: "コロコロ", r: "Koro Koro", m: "Something small rolling.", e: "ボールがコロコロ転がっています。", em: "⚽" },
+            { w: "ゴロゴロ", r: "Goro Goro", m: "Thunder sound or lazing around.", e: "週末は家でゴロゴロします。", em: "🏠" },
             { w: "最高", r: "Saikou", m: "The best! / Awesome!", e: "このアニメは最高です！", em: "👑" },
-            { w: "すごい", r: "Sugoi", m: "Amazing! / Great!", e: "あなたの才能はすごいです！", em: "👏" },
+            { w: "すごい", r: "Sugoi", m: "Amazing!", e: "あなたの才能はすごいです！", em: "👏" },
             { w: "マジで", r: "Maji de", m: "Seriously? / Really?", e: "マジで？それは信じられない！", em: "😲" },
-            { w: "ヤバい", r: "Yabai", m: "Crazy! / Bad or Good (depending on context).", e: "このケーキ、ヤバいぐらい美味しい！", em: "🔥" },
+            { w: "ヤバい", r: "Yabai", m: "Crazy! / Bad or Good.", e: "このケーキ、ヤバいぐらい美味しい！", em: "🔥" },
             { w: "やった", r: "Yatta", m: "Yay! / I did it!", e: "やった！テストに合格した！", em: "🎉" },
             { w: "嘘つき", r: "Usotsuki", m: "Liar!", e: "嘘つき！本当のことを言って！", em: "🤥" },
             { w: "可愛い", r: "Kawaii", m: "Cute! / Adorable!", e: "そのドレス、とても可愛いね。", em: "🎀" },
-            { w: "お宅", r: "Otaku", m: "Obsessed fan (anime/games).", e: "私はアニメのお宅です。", em: "🎮" },
-            { w: "ツンデレ", r: "Tsundere", m: "Cold but actually sweet person.", e: "彼女は典型的なツンデレだ。", em: "😠💞" },
+            { w: "お宅", r: "Otaku", m: "Obsessed fan.", e: "私はアニメのお宅です。", em: "🎮" },
+            { w: "ツンデレ", r: "Tsundere", m: "Cold but sweet person.", e: "彼女は典型的なツンデレだ。", em: "😠💞" },
             { w: "萌え", r: "Moe", m: "Heart-meltingly cute.", e: "メイド服は萌えですね。", em: "💘" },
-
-            // --- DAILY FUN WORDS ---
-            { w: "居眠り", r: "Inemuri", m: "Napping while sitting (in class/work).", e: "授業中に居眠りをしてしまった。", em: "😴" },
+            { w: "居眠り", r: "Inemuri", m: "Napping while sitting.", e: "授業中に居眠りをしてしまった。", em: "😴" },
             { w: "腹ペコ", r: "Harapeko", m: "Hungry belly.", e: "腹ペコだから全部食べるぞ！", em: "🍛" },
-            { w: "適当", r: "Tekitou", m: "Half-hearted or 'whatever' effort.", e: "適当にやらないで、ちゃんとやって！", em: "🤷‍♂️" },
+            { w: "適当", r: "Tekitou", m: "Half-hearted effort.", e: "適当にやらないで、ちゃんとやって！", em: "🤷‍♂️" },
             { w: "酔っ払い", r: "Yopparai", m: "A drunk person.", e: "道に酔っ払いがいます。", em: "🍺" },
             { w: "不思議", r: "Fushigi", m: "Mysterious or strange.", e: "不思議なことが起こりました。", em: "🔮" },
-            { w: "木漏れ日", r: "Komorebi", m: "Sunlight filtering through trees.", e: "森の木漏れ日は癒されます。", em: "🌿" },
-            { w: "猫被り", r: "Neko kaburi", m: "Someone hiding their true personality.", e: "彼は猫被りだから信じないで。", em: "🎭" },
-            { w: "爆笑", r: "Bakushou", m: "Roaring with laughter / LOL.", e: "その冗談で爆笑しました。", em: "🤣" },
+            { w: "木漏れ日", r: "Komorebi", m: "Sunlight through trees.", e: "森の木漏れ日は癒されます。", em: "🌿" },
+            { w: "猫被り", r: "Neko kaburi", m: "Hiding true personality.", e: "彼は猫被りだから信じないで。", em: "🎭" },
+            { w: "爆笑", r: "Bakushou", m: "Roaring with laughter.", e: "その冗談で爆笑しました。", em: "🤣" },
             { w: "一期一会", r: "Ichigo Ichie", m: "Once in a lifetime encounter.", e: "この出会いは一期一会です。", em: "🤝" },
             { w: "相棒", r: "Aibou", m: "Partner / Sidekick.", e: "君は僕の最高の相棒だ！", em: "🤜🤛" },
-
-            // --- 31 to 50 ---
-            { w: "頑張れ", r: "Ganbare", m: "Do your best! / Good luck!", e: "試合、頑張れ！", em: "💪" },
+            { w: "頑張れ", r: "Ganbare", m: "Do your best!", e: "試合、頑張れ！", em: "💪" },
             { w: "美味しい", r: "Oishii", m: "Delicious.", e: "この寿司はとても美味しい。", em: "🍣" },
             { w: "弁当", r: "Bento", m: "Boxed lunch.", e: "母の弁当は世界一です。", em: "🍱" },
             { w: "祭り", r: "Matsuri", m: "Festival.", e: "夏祭りに浴衣で行きたい。", em: "🏮" },
             { w: "忍者", r: "Ninja", m: "Ninja!", e: "忍者は影の中に隠れます。", em: "👤" },
             { w: "侍", r: "Samurai", m: "Samurai warrior.", e: "最後の侍は誰ですか？", em: "⚔️" },
             { w: "乾杯", r: "Kanpai", m: "Cheers!", e: "ビールで乾杯しましょう！", em: "🍻" },
-            { w: "満開", r: "Mankai", m: "Full bloom (flowers).", e: "桜が満開になりました。", em: "🌸" },
+            { w: "満開", r: "Mankai", m: "Full bloom.", e: "桜が満開になりました。", em: "🌸" },
             { w: "幽霊", r: "Yuurei", m: "Ghost.", e: "夜の学校に幽霊が出る？", em: "👻" },
             { w: "魔法", r: "Mahou", m: "Magic.", e: "魔法が使えたらいいのにな。", em: "🪄" },
             { w: "夢", r: "Yume", m: "Dream.", e: "私の夢は日本に行くことです。", em: "💭" },
-            { w: "絆", r: "Kizuna", m: "Bonds between people.", e: "家族の絆は強いです。", em: "🧵" },
+            { w: "絆", r: "Kizuna", m: "Bonds.", e: "家族の絆は強いです。", em: "🧵" },
             { w: "桜", r: "Sakura", m: "Cherry blossom.", e: "桜の花びらが舞っています。", em: "🌸" },
-            { w: "元気", r: "Genki", m: "Healthy / Full of energy.", e: "今日も一日元気です！", em: "🌞" },
+            { w: "元気", r: "Genki", m: "Healthy / Energetic.", e: "今日も一日元気です！", em: "🌞" },
             { w: "友達", r: "Tomodachi", m: "Friend.", e: "親友は大切な友達です。", em: "👫" },
             { w: "未来", r: "Mirai", m: "Future.", e: "未来のために勉強します。", em: "🚀" },
             { w: "秘密", r: "Himitsu", m: "Secret.", e: "これは二人だけの秘密だよ。", em: "🤫" },
-            { w: "一番", r: "Ichiban", m: "Number one / The best.", e: "あなたが一番です！", em: "🥇" },
+            { w: "一番", r: "Ichiban", m: "Number one.", e: "あなたが一番です！", em: "🥇" },
             { w: "心", r: "Kokoro", m: "Heart / Soul.", e: "心を込めて手紙を書きました。", em: "❤️" },
             { w: "光", r: "Hikari", m: "Light.", e: "光が部屋に差し込む。", em: "☀️" },
-
-            // --- 51 to 75 ---
-            { w: "絶望", r: "Zetsubou", m: "Despair (common in anime).", e: "絶望に負けないで！", em: "🌑" },
+            { w: "絶望", r: "Zetsubou", m: "Despair.", e: "絶望に負けないで！", em: "🌑" },
             { w: "希望", r: "Kibou", m: "Hope.", e: "希望の光が見える。", em: "🌟" },
             { w: "運命", r: "Unmei", m: "Fate / Destiny.", e: "これは運命の出会いですね。", em: "🧶" },
             { w: "冒険", r: "Bouken", m: "Adventure.", e: "新しい世界へ冒険に出よう！", em: "🧭" },
@@ -262,29 +280,27 @@
             { w: "自由", r: "Jiyuu", m: "Freedom.", e: "自由になりたい。", em: "🕊️" },
             { w: "情熱", r: "Jounetsu", m: "Passion.", e: "仕事に情熱を持つ。", em: "❤️‍🔥" },
             { w: "奇跡", r: "Kiseki", m: "Miracle.", e: "奇跡が起こった！", em: "✨" },
-            { w: "景色", r: "Keshiki", m: "Scenery / View.", e: "山頂の景色は最高だ。", em: "🖼️" },
+            { w: "景色", r: "Keshiki", m: "Scenery.", e: "山頂の景色は最高だ。", em: "🖼️" },
             { w: "孤独", r: "Kodoku", m: "Loneliness.", e: "孤独を感じる時もある。", em: "👤" },
-            { w: "感謝", r: "Kansha", m: "Gratitude / Thanks.", e: "皆様に感謝します。", em: "🙏" },
-            { w: "青春", r: "Seishun", m: "Youth / Springtime of life.", e: "これこそが青春だ！", em: "🚴‍♀️" },
+            { w: "感謝", r: "Kansha", m: "Gratitude.", e: "皆様に感謝します。", em: "🙏" },
+            { w: "青春", r: "Seishun", m: "Youth.", e: "これこそが青春だ！", em: "🚴‍♀️" },
             { w: "挑戦", r: "Chousen", m: "Challenge.", e: "新しいことに挑戦する。", em: "🎯" },
-            { w: "永遠", r: "Eien", m: "Forever / Eternity.", e: "友情は永遠です。", em: "♾️" },
+            { w: "永遠", r: "Eien", m: "Forever.", e: "友情は永遠です。", em: "♾️" },
             { w: "信頼", r: "Shinrai", m: "Trust.", e: "仲間を信頼しています。", em: "🤝" },
             { w: "誇り", r: "Hokori", m: "Pride.", e: "自分の仕事に誇りを持つ。", em: "🚩" },
-            { w: "誠実", r: "Seijitsu", m: "Sincerity / Honesty.", e: "誠実な person になりたい。", em: "😇" },
-            { w: "閃き", r: "Hirameki", m: "Flash of inspiration.", e: "いいアイデアが閃いた！", em: "💡" },
-
-            // --- 76 to 100 ---
-            { w: "ドキリ", r: "Dokiri", m: "Being startled.", e: "突然の声にドキリとした。", em: "❗" },
-            { w: "キラキラ", r: "Kira Kira", m: "Sparkling / Glittering.", e: "星がキラキラ輝いている。", em: "⭐" },
+            { w: "誠実", r: "Seijitsu", m: "Sincerity.", e: "誠実な人になりたい。", em: "😇" },
+            { w: "閃き", r: "Hirameki", m: "Inspiration.", e: "いいアイデアが閃いた！", em: "💡" },
+            { w: "ドキリ", r: "Dokiri", m: "Startled.", e: "突然の声にドキリとした。", em: "❗" },
+            { w: "キラキラ", r: "Kira Kira", m: "Sparkling.", e: "星がキラキラ輝いている。", em: "⭐" },
             { w: "ふわふわ", r: "Fuwa Fuwa", m: "Soft / Fluffy.", e: "パンがふわふわしている。", em: "🍞" },
-            { w: "ベタベタ", r: "Beta Beta", m: "Sticky / Clingy.", e: "手がベタベタする。", em: "🍯" },
-            { w: "ガヤガヤ", r: "Gaya Gaya", m: "Noisy / Crowded.", e: "教室がガヤガヤしている。", em: "🏫" },
-            { w: "ハラハラ", r: "Hara Hara", m: "Thrill / Suspense.", e: "映画を見てハラハラした。", em: "😨" },
-            { w: "バラバラ", r: "Bara Bara", m: "Scattered / Apart.", e: "家族がバラバラに住む。", em: "🧩" },
-            { w: "イライラ", r: "Ira Ira", m: "Irritated / Annoyed.", e: "渋滞でイライラする。", em: "💢" },
+            { w: "ベタベタ", r: "Beta Beta", m: "Sticky.", e: "手がベタベタする。", em: "🍯" },
+            { w: "ガヤガヤ", r: "Gaya Gaya", m: "Noisy.", e: "教室がガヤガヤしている。", em: "🏫" },
+            { w: "ハラハラ", r: "Hara Hara", m: "Suspense.", e: "映画を見てハラハラした。", em: "😨" },
+            { w: "バラバラ", r: "Bara Bara", m: "Scattered.", e: "家族がバラバラに住む。", em: "🧩" },
+            { w: "イライラ", r: "Ira Ira", m: "Irritated.", e: "渋滞でイライラする。", em: "💢" },
             { w: "うとうと", r: "Uto Uto", m: "Dozing off.", e: "電車でうとうとする。", em: "😴" },
-            { w: "すくすく", r: "Suku Suku", m: "Growing up fast.", e: "子供がすくすく育つ。", em: "🌱" },
-            { w: "のびのび", r: "Nobi Nobi", m: "Carefree / Feeling relaxed.", e: "田舎でのびのび過ごす。", em: "🏞️" },
+            { w: "すくすく", r: "Suku Suku", m: "Growing fast.", e: "子供がすくすく育つ。", em: "🌱" },
+            { w: "のびのび", r: "Nobi Nobi", m: "Carefree.", e: "田舎でのびのび過ごす。", em: "🏞️" },
             { w: "ピチピチ", r: "Pichi Pichi", m: "Fresh / Lively.", e: "ピチピチの魚を食べる。", em: "🐟" },
             { w: "ポカポカ", r: "Poka Poka", m: "Pleasantly warm.", e: "太陽でポカポカする。", em: "☀️" },
             { w: "ムカムカ", r: "Muka Muka", m: "Nauseous / Angry.", e: "胃がムカムカする。", em: "🤢" },
@@ -293,10 +309,10 @@
             { w: "コケコッコー", r: "Kokekokko", m: "Rooster's crow.", e: "朝、鶏が鳴く。", em: "🐓" },
             { w: "ブーブー", r: "Buu Buu", m: "Oink / Grumbling.", e: "不満をブーブー言う。", em: "🐷" },
             { w: "チュンチュン", r: "Chun Chun", m: "Bird's chirping.", e: "雀がチュンチュン鳴く。", em: "🐦" },
-            { w: "ズルズル", r: "Zuru Zuru", m: "Slurping sound (noodles).", e: "ラーメンをズルズルすする。", em: "🍜" },
+            { w: "ズルズル", r: "Zuru Zuru", m: "Slurping sound.", e: "ラーメンをズルズルすする。", em: "🍜" },
             { w: "コツコツ", r: "Kotsu Kotsu", m: "Steady effort.", e: "コツコツ努力する。", em: "🔨" },
             { w: "ガツガツ", r: "Gatsu Gatsu", m: "Eating greedily.", e: "ガツガツ食べている。", em: "🍖" },
-            { w: "サクサク", r: "Saku Saku", m: "Crispy sound / Efficiently.", e: "仕事がサクサク進む。", em: "🍪" },
+            { w: "サクサク", r: "Saku Saku", m: "Crispy / Efficiently.", e: "仕事がサクサク進む。", em: "🍪" },
             { w: "ボロボロ", r: "Boro Boro", m: "Worn out.", e: "服がボロボロだ。", em: "🏚️" },
             { w: "日本語", r: "Nihongo", m: "Japanese Language.", e: "日本語の勉強は楽しい！", em: "🇯🇵" }
         ];
@@ -306,9 +322,11 @@
 
         function updateContent() {
             const now = new Date();
-            // Kira hari dalam setahun (0-365)
-            const dayOfYear = Math.floor((now - new Date(now.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-            // Pilih perkataan berdasarkan hari
+            const start = new Date(now.getFullYear(), 0, 0);
+            const diff = now - start;
+            const oneDay = 1000 * 60 * 60 * 24;
+            const dayOfYear = Math.floor(diff / oneDay);
+            
             const today = japaneseData[dayOfYear % japaneseData.length];
 
             document.getElementById('word-emoji').innerText = today.em;
@@ -345,10 +363,7 @@
                 `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
         }
 
-        //  timer 
         setInterval(updateTimer, 1000);
-        
-        //  page load
         updateContent();
         updateTimer();
     </script>
