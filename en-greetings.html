@@ -5,6 +5,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | English Greetings</title>
     <link rel="stylesheet" href="style5.css">
+    <style>
+        /* --- Quick Fixes for Header & Pills --- */
+        .video-header {
+            padding: 80px 20px !important; /* Fixes "sempit" look */
+            background: linear-gradient(135deg, #447F98 0%, #2980b9 100%);
+            text-align: center;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .video-header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            font-weight: 800;
+        }
+
+        /* Pill Box Styling */
+        .category-pills {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            color: white;
+            padding: 10px 30px; /* Spacious padding for pill shape */
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .pill.active {
+            background: white;
+            color: #447F98;
+            border-color: white;
+        }
+
+        .pill:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Spacing for the grid */
+        .main-content {
+            padding-top: 40px !important;
+        }
+    </style>
 </head>
 <body>
 
@@ -23,6 +76,12 @@
     <header class="video-header">
         <h1>ENGLISH GREETINGS</h1>
         <p>Tap any card to hear the native pronunciation! 🇺🇸🇬🇧</p>
+        
+        <div class="category-pills">
+            <button class="pill active">Greetings</button>
+            <button class="pill">Action Verbs</button>
+            <button class="pill">Adjectives</button>
+        </div>
     </header>
 
     <main class="main-content greetings-page">
@@ -36,7 +95,6 @@
 
     <script>
         const greetingsData = [
-           
             { en: "Hello", pr: "He-low", de: "Informal greeting", emo: "👋" },
             { en: "Good morning", pr: "Gud mor-ning", de: "Used before noon", emo: "☀️" },
             { en: "Good afternoon", pr: "Gud af-ter-noon", de: "Used after 12pm", emo: "🌤️" },
@@ -85,8 +143,7 @@
         function speak(text) {
             window.speechSynthesis.cancel();
             const uttr = new SpeechSynthesisUtterance(text);
-            uttr.lang = 'en-US'; // English voice engine
-            uttr.volume = 1.0;
+            uttr.lang = 'en-US';
             uttr.rate = 0.9; 
             window.speechSynthesis.speak(uttr);
         }
@@ -94,5 +151,5 @@
         document.addEventListener('DOMContentLoaded', createGreetings);
     </script>
 </body>
-
 </html>
+
