@@ -4,21 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Speakify | Advanced Word of the Day</title>
+    <link rel="stylesheet" href="style2.css">
+    <link href="5.gif" rel="icon">
+    
     <style>
+        /* --- Custom Fonts --- */
+        @font-face { font-family: 'swi'; src: url(swirly.otf); }
+        @font-face { font-family: 'note'; src: url(Notedry.ttf); }
+        @font-face { font-family: 'jes'; src: url(Jester.ttf); }
+
         /* --- Global Styles --- */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
             background-color: #447F98;
-            width: 100%;
+            background-image: url('6.jpg'); 
+            background-repeat: repeat;
             overflow-x: hidden;
         }
 
@@ -27,7 +32,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 5%;
+            padding: 10px 5%;
             height: 80px;
             background: #ffffff;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -36,30 +41,12 @@
             z-index: 1000;
         }
 
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 800;
-            font-size: 1.4rem;
-            color: #447F98;
-        }
-
-        .logo img { height: 45px; }
+        .logo { display: flex; align-items: center; font-weight: bold; color: #1e73be; }
+        .logo img { height: 100px; width: auto; object-fit: contain; }
 
         .nav-links { list-style: none; display: flex; gap: 25px; }
         .nav-links a { text-decoration: none; color: #333; font-weight: 600; transition: 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: #447F98; }
-
-        .btn-signup {
-            background: #447F98;
-            color: #fff;
-            border: none;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-        }
 
         /* --- Main Content --- */
         .main-content {
@@ -72,134 +59,89 @@
 
         .page-title {
             color: white;
-            font-size: 2.5rem;
+            font-family: 'swi', sans-serif;
+            font-size: 3rem;
             margin-bottom: 5px;
-            text-align: center;
-            font-weight: 800;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .timer-box {
-            background: rgba(0,0,0,0.25);
+            background: rgba(255, 255, 255, 0.2);
             color: #FFD700;
             padding: 10px 25px;
             border-radius: 50px;
             font-weight: bold;
             margin-bottom: 30px;
-            font-size: 0.9rem;
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            letter-spacing: 1px;
+            border: 1px solid rgba(255, 215, 0, 0.5);
+            backdrop-filter: blur(5px);
         }
 
-        /* --- Advanced Flashcard --- */
-        .flashcard {
-            width: 100%;
-            max-width: 380px;
-            height: 480px;
-            perspective: 1000px;
-            cursor: pointer;
-        }
-
+        /* --- Flashcard --- */
+        .flashcard { width: 100%; max-width: 380px; height: 480px; perspective: 1000px; cursor: pointer; }
         .card-inner {
-            position: relative;
-            width: 100%;
-            height: 100%;
+            position: relative; width: 100%; height: 100%;
             transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
             transform-style: preserve-3d;
         }
-
         .flashcard.flipped .card-inner { transform: rotateY(180deg); }
-
         .card-front, .card-back {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+            position: absolute; width: 100%; height: 100%;
+            backface-visibility: hidden; border-radius: 30px;
+            display: flex; flex-direction: column; align-items: center;
+            justify-content: center; padding: 40px; box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
-
         .card-front { background: #ffffff; }
         .card-back { background: #FFD700; color: #222; transform: rotateY(180deg); }
 
         .emoji { font-size: 4.5rem; margin-bottom: 15px; }
-        .word-text { font-size: 2.2rem; font-weight: 800; color: #447F98; text-align: center; letter-spacing: -0.5px; }
-        .type-tag { background: #eef5f8; color: #447F98; padding: 4px 12px; border-radius: 10px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; margin-top: 10px; }
-        
-        .meaning-label { font-weight: 800; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 12px; opacity: 0.6; }
-        .meaning-content { font-size: 1.25rem; font-weight: 700; text-align: center; line-height: 1.4; margin-bottom: 25px; }
-        .example-content { font-style: italic; font-size: 1rem; color: #444; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; line-height: 1.5; }
+        .word-text { font-size: 2.5rem; font-weight: 800; color: #447F98; font-family: 'jes', sans-serif; text-align: center;}
+        .type-tag { background: #eef5f8; color: #447F98; padding: 4px 12px; border-radius: 10px; font-size: 0.7rem; text-transform: uppercase; margin-top: 10px; }
+        .meaning-content { font-size: 1.25rem; font-weight: 700; text-align: center; margin-bottom: 25px; }
+        .example-content { font-style: italic; font-size: 1.1rem; color: #444; text-align: center; border-top: 1.5px solid rgba(0,0,0,0.1); padding-top: 20px; font-family: 'note', cursive; }
 
-        .btn-speak {
-            background: #447F98;
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 25px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: 0.3s;
-        }
-        .btn-speak:hover { transform: scale(1.05); background: #356377; }
+        .btn-speak { background: #447F98; color: white; border: none; padding: 12px 30px; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 25px; }
+        .back-link { display: inline-block; margin: 30px 0; color: white; text-decoration: none; font-weight: bold; }
 
-        .back-link { display: inline-block; margin-top: 30px; color: white; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: 0.3s; }
-        .back-link:hover { transform: translateX(-5px); opacity: 0.8; }
-
-        footer { text-align: center; padding: 25px; color: white; background: rgba(0,0,0,0.1); width: 100%; font-family: monospace; }
+        footer { text-align: center; padding: 25px; color: white; background: #629BB5; width: 100%; font-family: Courier, monospace; }
     </style>
 </head>
 <body>
 
     <nav class="navbar">
-        <div class="logo">
-            <img src="speakify.jpg" alt="Logo">
-            <span>SPEAKIFY</span>
-        </div>
+        <div class="logo"><img src="speakify.png" alt="Logo"><span>SPEAKIFY</span></div>
         <ul class="nav-links">
             <li><a href="index.html">Home</a></li>
-            <li><a href="language.html" class="active">Language</a></li>
-            <li><a href="about.html">About Us</a></li>
+            <li><a href="language.html">Language</a></li>
+            <li><a href="english-menu.html" class="active">English Menu</a></li>
         </ul>
-        <div class="nav-actions">
-            <button class="btn-signup">Sign Up</button>
-        </div>
     </nav>
 
     <main class="main-content">
         <h1 class="page-title">Lexicon of the Day</h1>
-        <div class="timer-box">NEXT EVOLUTION IN: <span id="timer">00:00:00</span></div>
+        <div class="timer-box">NEXT WORD IN: <span id="timer">00:00:00</span></div>
 
         <div class="flashcard" onclick="this.classList.toggle('flipped')">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="emoji" id="word-emoji">📖</div>
-                    <div class="word-text" id="word-text">Chargement...</div>
-                    <div class="type-tag" id="word-type">Adjective</div>
+                    <div class="word-text" id="word-text">Loading...</div>
+                    <div class="type-tag" id="word-type">Noun</div>
                     <button class="btn-speak" onclick="event.stopPropagation(); speakWord()">Listen 🔊</button>
-                    <p style="margin-top: 30px; font-size: 0.75rem; color: #bbb; font-weight: bold;">TAP TO UNVEIL MEANING</p>
+                    <p style="margin-top: 30px; font-size: 0.75rem; color: #bbb; font-weight: bold;">TAP TO FLIP</p>
                 </div>
                 <div class="card-back">
-                    <p class="meaning-label">DEFINITION</p>
+                    <p style="font-size: 0.7rem; font-weight: 800; opacity: 0.6;">DEFINITION</p>
                     <p class="meaning-content" id="word-meaning"></p>
-                    <p class="meaning-label" style="margin-top:10px;">EXAMPLE SENTENCE</p>
+                    <p style="font-size: 0.7rem; font-weight: 800; opacity: 0.6;">EXAMPLE</p>
                     <p class="example-content" id="word-example"></p>
                 </div>
             </div>
         </div>
 
-        <a href="english-menu.html" class="back-link">← Return to Menu</a>
+        <a href="english-menu.html" class="back-link">← Return to English Menu</a>
     </main>
 
-    <footer>&copy; 2026 SPEAKIFY </footer>
+    <footer>&copy; 2026 SPEAKIFY</footer>
 
     <script>
         const advancedWords = [
@@ -252,7 +194,6 @@
             { w: "Brazen", t: "Adjective", m: "Bold and without shame.", e: "The thief made a brazen attempt to steal the car.", em: "🔥" },
             { w: "Coherent", t: "Adjective", m: "Logical and consistent.", e: "He failed to provide a coherent explanation.", em: "🔗" },
             { w: "Deference", t: "Noun", m: "Polite submission and respect.", e: "He addressed the judge with great deference.", em: "🙇" },
-            { w: "Eloquent", t: "Adjective", m: "Fluent or persuasive in speaking.", e: "She gave an eloquent plea for environmental protection.", em: "🎙️" },
             { w: "Fervent", t: "Adjective", m: "Having or displaying a passionate intensity.", e: "She is a fervent believer in social justice.", em: "🔥" },
             { w: "Gregarious", t: "Adjective", m: "Fond of company; sociable.", e: "Dolphins are known for being gregarious animals.", em: "🐬" },
             { w: "Hiatus", t: "Noun", m: "A pause or break in a sequence or series.", e: "The band went on hiatus for three years.", em: "⏸️" },
@@ -287,7 +228,7 @@
             { w: "Kudos", t: "Noun", m: "Praise and honor received for an achievement.", e: "Kudos to the team for their hard work.", em: "👏" },
             { w: "Lament", t: "Verb", m: "A passionate expression of grief or sorrow.", e: "She lamented the loss of her childhood home.", em: "😢" },
             { w: "Metaphor", t: "Noun", m: "A figure of speech where a word is applied to an object.", e: "The world is a stage' is a famous metaphor.", em: "🎭" },
-            { w: "Nomad", t: "Noun", m: "A person who does not stay long in the yang place.", e: "He lived as a digital nomad for five years.", em: "⛺" },
+            { w: "Nomad", t: "Noun", m: "A person who does not stay long in the same place.", e: "He lived as a digital nomad for five years.", em: "⛺" },
             { w: "Ostentatious", t: "Adjective", m: "Characterized by vulgar or pretentious display.", e: "He drives an ostentatious gold-plated car.", em: "💎" },
             { w: "Paradox", t: "Noun", m: "A statement that seems self-contradictory but is true.", e: "The paradox of choice means more options can lead to less satisfaction.", em: "🌀" },
             { w: "Robust", t: "Adjective", m: "Sturdy and strong in form, constitution, or system.", e: "The company has a robust security system.", em: "🏗️" },
@@ -301,8 +242,7 @@
             { w: "Affluence", t: "Noun", m: "The state of having a great deal of money; wealth.", e: "The neighborhood is known for its affluence.", em: "🏰" },
             { w: "Brevity", t: "Noun", m: "Concise and exact use of words in writing.", e: "Brevity is the soul of wit.", em: "✂️" },
             { w: "Catharsis", t: "Noun", m: "Process of releasing strong or repressed emotions.", e: "Crying can be a form of emotional catharsis.", em: "🌊" },
-            { w: "Dormant", t: "Adjective", m: "Having normal functions suspended as if in sleep.", e: "The volcano has been dormant for centuries.", em: "🌋" },
-            { w: "Eloquent", t: "Adjective", m: "Fluent or persuasive in speaking or writing.", e: "His speech was eloquent and powerful.", em: "🗣️" }
+            { w: "Dormant", t: "Adjective", m: "Having normal functions suspended as if in sleep.", e: "The volcano has been dormant for centuries.", em: "🌋" }
         ];
 
         function updateWord() {
